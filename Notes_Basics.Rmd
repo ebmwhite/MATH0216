@@ -8,28 +8,27 @@ output:
     theme: yeti
 ---
 
-# Installing and Setting up RStudio
+# Getting Set-up
+
+## Installing and Setting up RStudio
 
 The R console looks like this: 
 
 ![](https://d33wubrfki0l68.cloudfront.net/692f3658d35df168276cf46e3e083f908a5cc105/f7707/wp-content/uploads/2014/04/rstudio-windows.png)
 
-# File Organization
+## File Organization
 
-Make sure that you set up a folder for this class. It is important that you know it's file path. 
+Make sure that you set up a folder for this class. 
 
-Download the Notes_Basics.Rmd file to your computer and add it to your class folder. 
+## Using RMarkdown/knitr
 
-
-# Using RMarkdown/knitr
-
-You can *knit* the file. The first time you do this you will need to make sure you have the `knitr` package installed.
+You can *knit* the file. The first time you do this you will need to make sure you have the `knitr` package installed. You have the option to knit into `.html`, `.pdf`, and `.doc`. In general, in this course we will be knitting into `.html`. 
 
 ## RMarkdown formatting 
 
 To make something "code-looking" we use the grave accent ` found in the upper left of your keyboard. 
 
-To create a header, place a hash tag at the start of the line. For example, `# Header 1` or create a level 2 header using `# Header Level 2`. 
+To create a header, place a hash tag at the start of the line. For example, `# Header 1` or create a level 2 header using `## Header Level 2`. 
 
 To make text italics put asterisk around the text `*like this*`. To make text bold, put two asterisks around the text `**like this**`. 
 
@@ -60,12 +59,12 @@ Add an image:
 
 The vast majority of markdown syntax are available in the [RStudio RMarkdown Cheatsheet, Section 3](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
 
-## Chunk Options 
+## R Chunks 
 
 Create an R chunk: 
 
 ```{r}
-2+3
+2+2
 ```
 
 OR
@@ -100,9 +99,8 @@ This is the number `r x`.
 
 becomes... This is the number `r x`.
 
-## Knitting into .html, .doc, or .pdf
 
-# Installing Packages
+## Installing Packages
 
 Packages can contain lots of things including: data sets, functions, etc.
 
@@ -110,12 +108,16 @@ You can install packages using the packages tab or you can use the code `install
 
 In each new R session where you want to use the package you will have to load it by typing `library('packageyouwant')` in the console (or in the RMarkdown document - more later). 
 
+To get help with a package (or a function in a package) you can type `?packagename` into the console. 
+
 ## Additional Reading (Optional)
 
 - [R for Data Science, Chapter on RMarkdown](https://r4ds.had.co.nz/r-markdown.html)
 - For a great RMarkdown Cheat sheet. In RStudio go to *Help* -> *Cheatsheets* -> *RMarkdown Cheatsheet*
 
 # Some Basic R code
+
+## Variables, Calculations, Vectors
 
 Assigning Variables: 
 
@@ -127,7 +129,7 @@ Referencing Elements of a Vector:
 
 Adding to Vectors:
 
-# Importing  Data
+## Importing  Data
 
 From a file on your computer: 
 
@@ -135,7 +137,7 @@ From the web:
 
 For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
 
-# Basics for Working with a Dataframe
+## Basics for Working with a Dataframe
 
 Assessing Size:
 
@@ -147,14 +149,6 @@ Calculations:
 
 Conditional Subsetting: 
 
-
-# Getting Help
-
-Use ?package
-
-# Local R workspace vs. RMarkdown workspace
-
-# Chunk Options
 
 # Best Practices 
 
