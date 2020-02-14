@@ -1,0 +1,39 @@
+---
+title: "MATH 216: In Class Activity 02/12"
+author: "Your Name Here"
+output:
+  html_document:
+    code_folding: hide
+---
+
+# Instructions: 
+
+Answer the following questions. When you have finished, upload the `.html` file to Canvas. 
+
+
+# Getting to know you & R Markdown formatting
+
+1.  Tell me your name in bold lettering. Is there anything I should know about your name and how to address you? (ie. I prefer to be called Liz instead of Elizabeth, I prefer the pronouns he/his/him, etc.)
+
+
+
+2. Tell me your major in italics lettering. Any ideas what you might like to do after you graduate? (It's okay to say you don't know)
+
+
+
+3.  Make a list of a few of your interests. Make sure to use R markdown fomatting. 
+
+4.  Include a link to something interesting or funny.
+
+5.  Include a picture. This could be a picture of you or a picture of something you find funny or interesting.  
+
+6. Have you ever learning any coding or programming before? If so, which languages have you learned and how much do you know/remember? Note: It's totally okay if you have no programming experience. 
+
+7. Create an object called `c`. Decide on a number between 1 and 10 that denotes your comfort level with taking a data science course this semester (10 being that you are so, so excited and 1 being that you almost threw up this morning just thinking about it). Assign this value to `c`. 
+
+
+8.  Write a few sentences about why you choose this number. Be sure to print out this value of `c` somewhere in your paragraph as inline code.
+
+9. Tell me a little about why you choose to take Data Science this semester. Any skills you hope to gain? Anything specifically you want to cover? 
+
+10.  (Optional) Use this space below to tell me anything about yourself that you think Emily should know in order to teach you effectively. You can also use this space below to ask any questions or state any concerns.
