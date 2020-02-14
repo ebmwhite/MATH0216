@@ -122,111 +122,132 @@ To get help with a package (or a function in a package) you can type `?packagena
 Assigning Variables: 
 
 ```{r}
-x<-56
+x <- 2+2
+y <- 6
 ```
 
 Calculations: 
 
 ```{r}
-y <- x*2 #multiply
-          # note that because value is assigned to y, it won't print out
-y #prints out the value of y
-x/2 #divide
-x^2 #x to the power of 2
+x/2
+x*2
+x+y
 ```
 
 
 Vectors: 
 
 ```{r}
-# c() function: concatenate
-heights <- c(67, 100, 34, 78, 80)
+#c() function: concatenate
+vector1 <- c(1,2,9,15,1000)
 ```
+
 
 Referencing Elements of a Vector:
 
 ```{r}
-heights[3]
+vector1[1]
 ```
 
-Adding to Vectors:
+Functions: 
 
 ```{r}
-heights <- c(heights, 90)
-heights
+mean(vector1)
 ```
+
+If you are ever unsure about a function, you can type `?functionname` into the console. In this case, `?mean`. 
 
 ## Importing  Data
 
+For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
+
 From a file on your computer: 
 
-```{r}
-airbnb <- read.csv("NYCairbnb2019.csv")
-```
-
-From the web: 
-
+From a package: 
 ```{r}
 library("openintro")
 cars
 ```
 
-For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
+Make sure the file is saved in the same folder as your .Rmd file. 
+```{r}
+NYCairbnb <- read.csv("NYCairbnb2019.csv")
+```
 
 ## Basics for Working with a Dataframe
 
 Assessing Size:
 
 ```{r}
-# dim() spits out dimensions of a dataframe
-dim(airbnb)
+dim(NYCairbnb)
 ```
 
 Names: 
 
 ```{r}
-# names() spits out column names of a dataframe
-names(airbnb)
+names(NYCairbnb)
+```
+
+Referencing values: 
+
+You can reference a particular row and/or column of a dataset by using `dataset[row,column]`. For example, if I wanted to know the value in the 1st row, 3rd column in the `NYCairbnb` dataset, I would use the command
+```{r}
+NYCairbnb[1,3]
 ```
 
 Referencing Columns: 
 
-```{r}
-airbnb$latitude
-airbnb[,3]
-airbnb[,"latitude"]
+```{r, eval=F}
+NYCairbnb$price
+NYCairbnb[,"price"]
+NYCairbnb[,10]
 
 
-attach(airbnb)
-latitude
+attach(NYCairbnb)
+price
 ```
 
 Calculations: 
 
 ```{r}
-mean(airbnb$price)
-median(airbnb$price)
-sd(airbnb$price) #standard deviation
+mean(NYCairbnb$price)
+sd(NYCairbnb$price)
 ```
 
+
+Calculating Means by Groups: 
 ```{r}
-tapply(airbnb$price, airbnb$neighbourhood_group, mean)
-tapply(airbnb$price, airbnb$room_type, mean)
+tapply(NYCairbnb$price, NYCairbnb$neighbourhood_group, mean)
 ```
+
+Basic Plots: 
+
+```{r}
+hist(NYCairbnb$price)
+boxplot(NYCairbnb$price)
+```
+
+
 
 Conditional Subsetting: 
 
 ```{r}
-airbnb[airbnb$price >= 8000,]
+#prints out all the rows where the price per night is more than $8000 per night
+NYCairbnb[NYCairbnb$price >=8000,]
 ```
 
 ```{r}
-airbnb[airbnb$neighbourhood_group=="Manhattan",]
+NYCairbnb[NYCairbnb$price >=8000, c("host_name","neighbourhood", "room_type","price")]
 ```
 
 ```{r}
-hist(airbnb$price)
-plot(airbnb$reviews_per_month, airbnb$price)
+NYCairbnb[NYCairbnb$price == 20, c("host_name","neighbourhood", "room_type","price")]
+```
+
+Logical AND `&` and logical OR `|`
+
+```{r}
+NYCairbnb[NYCairbnb$price <=30 & NYCairbnb >=25, c("host_name","neighbourhood", "room_type","price")]
 ```
 
 # Best Practices 
@@ -275,9 +296,6 @@ by @alisonhorst
 - [Data Organization in Spreadsheets, from The American Statistician](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989)
 
 
-# The Basics of Working with Missing Data
 
-
-# Working with Factors
 
 
