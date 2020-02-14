@@ -184,14 +184,14 @@ dim(airbnb)
 
 Names: 
 
-```{r}
+```{r eval=FALSE}
 # names() spits out column names of a dataframe
 names(airbnb)
 ```
 
 Referencing Columns: 
 
-```{r}
+```{r eval=F}
 airbnb$latitude
 airbnb[,3]
 airbnb[,"latitude"]
@@ -210,19 +210,27 @@ sd(airbnb$price) #standard deviation
 ```
 
 ```{r}
+# calculates the mean price, broken down by neighbourhood group
 tapply(airbnb$price, airbnb$neighbourhood_group, mean)
+
+#calculates the mean price, broken down by room type
 tapply(airbnb$price, airbnb$room_type, mean)
 ```
 
 Conditional Subsetting: 
 
 ```{r}
+# prints out all the rows where the price is more than 8000
 airbnb[airbnb$price >= 8000,]
 ```
 
-```{r}
+```{r eval=F}
+# prints out all the rows where the neighbourhood group is Manhattan
+# note the double equal sign
 airbnb[airbnb$neighbourhood_group=="Manhattan",]
 ```
+
+Basic Plotting: 
 
 ```{r}
 hist(airbnb$price)
