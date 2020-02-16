@@ -1,0 +1,49 @@
+---
+title: "MATH 216: In Class Activity 02/17"
+author: "Your Name Here"
+output:
+  html_document:
+    code_folding: hide
+---
+
+# Instructions: 
+
+Answer the following questions. When you have finished, upload the `.html` file to Canvas. 
+
+
+# Challenge: Working with Missing Data
+
+1. Using this vector of heights in inches, create a new vector, heights_no_na, with the NAs removed.
+
+```{r}
+heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+```
+
+2. Calculate the median height
+
+```{r}
+
+```
+
+3. Use R to figure out how many people in the set are taller than 67 inches.
+
+```{r}
+
+```
+
+# Challenge: Working with Factors
+
+Before this challenge you will need to import in the dataset
+
+```{r}
+download.file(url="https://ndownloader.figshare.com/files/2292169", destfile = "surveys.csv")
+surveys <- read.csv("surveys.csv")
+```
+
+1. Print out the names of the columns in this dataset
+
+
+2. 
+
+
+3. 

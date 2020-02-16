@@ -122,132 +122,131 @@ To get help with a package (or a function in a package) you can type `?packagena
 Assigning Variables: 
 
 ```{r}
-x <- 2+2
-y <- 6
+x<-56
 ```
 
 Calculations: 
 
 ```{r}
-x/2
-x*2
-x+y
+y <- x*2 #multiply
+          # note that because value is assigned to y, it won't print out
+y #prints out the value of y
+x/2 #divide
+x^2 #x to the power of 2
 ```
 
 
 Vectors: 
 
 ```{r}
-#c() function: concatenate
-vector1 <- c(1,2,9,15,1000)
+# c() function: concatenate
+heights <- c(67, 100, 34, 78, 80)
 ```
-
 
 Referencing Elements of a Vector:
 
 ```{r}
-vector1[1]
+heights[3]
 ```
 
-Functions: 
+Adding to Vectors:
 
 ```{r}
-mean(vector1)
+heights <- c(heights, 90)
+heights
 ```
-
-If you are ever unsure about a function, you can type `?functionname` into the console. In this case, `?mean`. 
 
 ## Importing  Data
 
-For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
-
 From a file on your computer: 
 
-From a package: 
+```{r}
+airbnb <- read.csv("NYCairbnb2019.csv")
+```
+
+From the web: 
+
 ```{r}
 library("openintro")
 cars
 ```
 
-Make sure the file is saved in the same folder as your .Rmd file. 
-```{r}
-NYCairbnb <- read.csv("NYCairbnb2019.csv")
-```
+For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
 
 ## Basics for Working with a Dataframe
 
 Assessing Size:
 
 ```{r}
-dim(NYCairbnb)
+# dim() spits out dimensions of a dataframe
+dim(airbnb)
 ```
 
 Names: 
 
-```{r}
-names(NYCairbnb)
-```
-
-Referencing values: 
-
-You can reference a particular row and/or column of a dataset by using `dataset[row,column]`. For example, if I wanted to know the value in the 1st row, 3rd column in the `NYCairbnb` dataset, I would use the command
-```{r}
-NYCairbnb[1,3]
+```{r eval=FALSE}
+# names() spits out column names of a dataframe
+names(airbnb)
 ```
 
 Referencing Columns: 
 
-```{r, eval=F}
-NYCairbnb$price
-NYCairbnb[,"price"]
-NYCairbnb[,10]
+```{r eval=F}
+airbnb$latitude
+airbnb[,3]
+airbnb[,"latitude"]
 
 
-attach(NYCairbnb)
-price
+attach(airbnb)
+latitude
 ```
 
 Calculations: 
 
 ```{r}
-mean(NYCairbnb$price)
-sd(NYCairbnb$price)
+mean(airbnb$price)
+median(airbnb$price)
+sd(airbnb$price) #standard deviation
 ```
-
-
-Calculating Means by Groups: 
-```{r}
-tapply(NYCairbnb$price, NYCairbnb$neighbourhood_group, mean)
-```
-
-Basic Plots: 
 
 ```{r}
-hist(NYCairbnb$price)
-boxplot(NYCairbnb$price)
+# calculates the mean price, broken down by neighbourhood group
+tapply(airbnb$price, airbnb$neighbourhood_group, mean)
+
+#calculates the mean price, broken down by room type
+tapply(airbnb$price, airbnb$room_type, mean)
 ```
-
-
 
 Conditional Subsetting: 
 
 ```{r}
-#prints out all the rows where the price per night is more than $8000 per night
-NYCairbnb[NYCairbnb$price >=8000,]
+# prints out all the rows where the price is more than 8000
+airbnb[airbnb$price >= 8000,]
+```
+
+```{r eval=F}
+# prints out all the rows where the neighbourhood group is Manhattan
+# note the double equal sign
+airbnb[airbnb$neighbourhood_group=="Manhattan",]
+```
+
+## Basic Plotting
+
+```{r}
+hist(airbnb$price)
+plot(airbnb$reviews_per_month, airbnb$price)
+```
+
+
+```{r}
+plot(cars$mpgCity, cars$weight)
+boxplot(cars$mpgCity ~ cars$type)
 ```
 
 ```{r}
-NYCairbnb[NYCairbnb$price >=8000, c("host_name","neighbourhood", "room_type","price")]
-```
+table(cars$type)
+barplot(table(cars$type))
 
-```{r}
-NYCairbnb[NYCairbnb$price == 20, c("host_name","neighbourhood", "room_type","price")]
-```
-
-Logical AND `&` and logical OR `|`
-
-```{r}
-NYCairbnb[NYCairbnb$price <=30 & NYCairbnb >=25, c("host_name","neighbourhood", "room_type","price")]
 ```
 
 # Best Practices 
@@ -296,6 +295,60 @@ by @alisonhorst
 - [Data Organization in Spreadsheets, from The American Statistician](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989)
 
 
+# The Basics of Working with Missing Data
+
+Missing data are usually in the data as `NA`, `NaN`, `N/A`, or `-9999`. When doing operators on numbers, most functions will return `NA` if the data includes missing values. 
+
+```{r}
+mean(airbnb$reviews_per_month)
+```
+
+```{r}
+# use arguement na.rm to remove NAs
+mean(airbnb$reviews_per_month, na.rm=T)
+
+#OR 
+
+# use function na.omit() to return a vector without NAs, then take the mean
+mean(na.omit(airbnb$reviews_per_month))
+```
 
 
+# Working with Factors
 
+Factors are used to represent categorical data. Factors can be ordered or unordered and are an important class for statistical analysis and plotting. 
+
+```{r}
+#to check whether something is a factor
+is.factor(cars$type)
+```
+
+```{r}
+# to make something a factor
+cars$type <- factor(cars$type)
+```
+
+
+Once created, factors can only contain a pre-defined set values, known as levels. By default, R always sorts levels in alphabetical order. 
+
+```{r}
+#to see the levels
+levels(cars$type)
+
+#to see the number of levels
+nlevels(cars$type)
+```
+
+
+```{r}
+#to change the order or to give order
+cars$type <- factor(cars$type, levels = c("small", "midsize", "large"), ordered=T)
+
+min(cars$type)
+```
+
+Note that if you only want to plot two of the factors (say small and midsize cars). 
+
+```{r}
+boxplot(cars$mpgCity~cars$type)
+```

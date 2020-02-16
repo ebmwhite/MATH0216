@@ -237,6 +237,7 @@ hist(airbnb$price)
 plot(airbnb$reviews_per_month, airbnb$price)
 ```
 
+
 # Best Practices 
 
 ## Commenting
