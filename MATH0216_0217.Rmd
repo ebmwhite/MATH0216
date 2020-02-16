@@ -36,14 +36,41 @@ heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65,
 Before this challenge you will need to import in the dataset
 
 ```{r}
-download.file(url="https://ndownloader.figshare.com/files/2292169", destfile = "surveys.csv")
-surveys <- read.csv("surveys.csv")
+surveys <- read.csv("https://ebmwhite.github.io/MATH0216/data/sample.csv")
 ```
 
 1. Print out the names of the columns in this dataset
 
 
-2. 
+2. Consider the following plot of the number of participants assigned to each of the treatment groups. Use `factor()` prior to the given code to re-level the treatments so that the control group is plotted last. 
+
+```{r}
 
 
-3. 
+table(surveys$Group)
+barplot(table(surveys$Group))
+```
+
+
+Notice that the some of the genders are recorded as capital letters and some of the genders are recorded as lower case letters. 
+
+```{r}
+levels(surveys$Gender)
+```
+
+We can convert "F" to "f" using the following code: 
+```{r}
+surveys$Gender[surveys$Gender=="F"]<-"f"
+# drop levels will drop any levels which don't have any assigned to that level
+# surveys$Gender <- droplevels(surveys$Gender)
+```
+
+```{r}
+boxplot(surveys$BloodPressure ~ surveys$Gender)
+```
+
+3. Create a boxplots of `BloodPressure` for `f` and `m`. Note you will need to convert `M` to `m` and then drop `M` as a factor. 
+
+```{r}
+
+```
