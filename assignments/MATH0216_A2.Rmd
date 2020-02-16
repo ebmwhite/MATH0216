@@ -1,0 +1,81 @@
+---
+title: 'MATH 216: Assignment 2'
+author: "Your Name Here"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: yeti
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Loading the data
+
+The following data is salaries at the University of North Carolina (UNC). Load it the data and take a look through it. 
+
+```{r}
+data <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
+```
+
+# Problems
+
+## Question 1
+
+Return a data frame with columns: `name`, `dept`, `age`, `totalsal`
+
+```{r}
+
+```
+
+## Question 2
+
+Rename the `fte` column to `fulltime`. Make sure this change is saved (i.e. data <- ...).
+
+```{r}
+
+```
+
+## Question 3
+What is the mean salary in the Neurosurgery department?
+
+```{r}
+
+```
+
+
+Return a data frame with employee’s in the Neurosurgery department making more than $500,000. Why might these professors be so well paid?
+
+```{r}
+
+```
+
+## Question 4
+
+What is the total amount that full time Dermatology employees get paid?
+
+```{r}
+
+```
+
+
+## Question 5
+
+How many departments have at least 10 employees?
+
+```{r}
+
+```
+
+## Question 6
+
+Plot number of people hired by the CS dept per year vs. year
+
+```{r}
+
+```
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this lab. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. **You must include at least one acknowledgement**. 
