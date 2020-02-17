@@ -161,14 +161,14 @@ heights
 From a file on your computer: 
 
 ```{r}
-airbnb <- read.csv("NYCairbnb.csv")
+airbnb <- read.csv("http://ebmwhite.github.io/MATH0216/data/NYCairbnb2019.csv")
 ```
 
 From the web: 
 
 ```{r}
 library("openintro")
-cars
+data(cars)
 ```
 
 For now, we will mostly be working with `.csv` and `.xls` files. Later in the course, we may discuss other types of files. 
@@ -327,6 +327,7 @@ levels(cars$type)
 #to see the number of levels
 nlevels(cars$type)
 
+#to see how many are in each level
 table(cars$type)
 ```
 
