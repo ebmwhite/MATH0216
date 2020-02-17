@@ -161,7 +161,7 @@ heights
 From a file on your computer: 
 
 ```{r}
-airbnb <- read.csv("NYCairbnb2019.csv")
+airbnb <- read.csv("NYCairbnb.csv")
 ```
 
 From the web: 
