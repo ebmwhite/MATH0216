@@ -10,37 +10,110 @@ output:
 
 # Loading the tidyverse
 
-Make sure that you have the tidyverse installed by typing `install.packages("tidyverse")` into the Console in the bottom left corner. You only need to do this once. 
+The tidyverse is an opinionated collection of R packages designed for data science. Make sure that you have the tidyverse installed by typing `install.packages("tidyverse")` into the Console in the bottom left corner. You only need to do this once. 
 
-```{r}
+```{r include=FALSE}
 #Within each document, it is important to call the tidyverse package so it knows you will be using functions/data/etc from inside that package
-
 library(tidyverse)
 ```
 
-## Choosing Columns with `select()`
+# tibbles
 
-## Renaming variables with `rename()`
+For the next little while we willwork with “tibbles” instead of R’s traditional data.frame. Tibbles are data frames, but they tweak some older behaviours to make life a little easier.
 
-## Sorting and Reordering with `arrange()`
+```{r}
+#as.tibble()
+```
 
-## Subsetting and Filtering Data with `filter()`
+There are two main differences in the usage of a tibble vs. a classic data.frame: printing and subsetting.  
 
-## Piping
+- Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. Tibbles are designed so that you don’t accidentally overwhelm your console when you print large data frames. 
+- So far all the tools you’ve learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, `$` and `[[`
 
-# Summarizing Data
+```{r}
+df <- tibble(
+  x = runif(5),
+  y = rnorm(5)
+)
 
-# Adding new columns
+# Extract by name
+df$x
+df[["x"]]
 
-Using `dplyr`'s `mutate()`:
+# Extract by position
+df[[1]]
+```
+
+
+## Subsetting
+
+# `Dplyr`
+
+![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/dplyr.png?raw=true)
+
+Choosing Columns with `select()`
+
+```{r}
+
+```
+
+
+Renaming variables with `rename()`
+
+```{r}
+
+```
+
+
+Sorting and Reordering with `arrange()`
+
+```{r}
+
+```
+
+
+Subsetting and Filtering Data with `filter()`
+
+```{r}
+
+```
+
+
+
+
+
+Adding new columns using `dplyr`'s `mutate()`:
+
+```{r}
+
+```
+
 
 ![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_mutate.png)
 
-# Reshaping Data (Wide/Long) 
+# Piping
+
+![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/pipe.png?raw=true)
+
+The pipe, `%>%`, comes from the magrittr package by Stefan Milton Bache. Packages in the tidyverse load `%>%` for you automatically, so you don’t usually load magrittr explicitly. 
+
+The point of the pipe is to help you write code in a way that is easier to read and understand. 
+
+```{r}
+
+```
+
+# `tidyr`
+
+The goal of tidyr is to help you create tidy data. Tidy data is data where:
+
+- Every column is variable.
+- Every row is an observation..
+- Every cell is a single value.
+
+Reshaping Data (Wide/Long) 
 
 Wide Data
-
-
 Long Data
 
 There are two sets of methods that are explained below:
