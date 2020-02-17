@@ -337,6 +337,8 @@ levels(cars$type)
 
 #to see the number of levels
 nlevels(cars$type)
+
+table(cars$type)
 ```
 
 

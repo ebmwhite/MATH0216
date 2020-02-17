@@ -286,7 +286,47 @@ by @alisonhorst
 
 # The Basics of Working with Missing Data
 
+Missing data are usually in the data as `NA`, `NaN`, `N/A`, or `-9999`. When doing operators on numbers, most functions will return `NA` if the data includes missing values. 
+
+```{r}
+mean(airbnb$reviews_per_month)
+```
+
+```{r}
+# use arguement na.rm to remove NAs
+mean(airbnb$reviews_per_month, na.rm=T)
+
+#OR 
+
+# use function na.omit() to return a vector without NAs, then take the mean
+mean(na.omit(airbnb$reviews_per_month))
+```
+
 
 # Working with Factors
 
+Factors are used to represent categorical data. Factors can be ordered or unordered and are an important class for statistical analysis and plotting. 
+
+```{r}
+#to check whether something is a factor
+is.factor(cars$type)
+```
+
+```{r}
+# to make something a factor
+cars$type <- factor(cars$type)
+```
+
+
+Once created, factors can only contain a pre-defined set values, known as levels. By default, R always sorts levels in alphabetical order. 
+
+```{r}
+#to see the levels
+levels(cars$type)
+
+#to see the number of levels
+nlevels(cars$type)
+
+table(cars$type)
+```
 
