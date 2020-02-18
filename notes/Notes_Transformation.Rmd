@@ -12,67 +12,56 @@ output:
 
 The tidyverse is an opinionated collection of R packages designed for data science. Make sure that you have the tidyverse installed by typing `install.packages("tidyverse")` into the Console in the bottom left corner. You only need to do this once. 
 
-```{r include=FALSE}
+```{r}
 #Within each document, it is important to call the tidyverse package so it knows you will be using functions/data/etc from inside that package
 library(tidyverse)
 ```
 
-# tibbles
+
+
+# ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/tibble.png?raw=true){width=50px} `tibble` 
 
 For the next little while we willwork with “tibbles” instead of R’s traditional data.frame. Tibbles are data frames, but they tweak some older behaviours to make life a little easier.
-
-```{r}
-#as.tibble()
-```
 
 There are two main differences in the usage of a tibble vs. a classic data.frame: printing and subsetting.  
 
 - Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. Tibbles are designed so that you don’t accidentally overwhelm your console when you print large data frames. 
 - So far all the tools you’ve learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, `$` and `[[`
 
+
+We will be working with the `diamonds` dataset that is contained within the `tidyverse` dataset
+
 ```{r}
-df <- tibble(
-  x = runif(5),
-  y = rnorm(5)
-)
-
-# Extract by name
-df$x
-df[["x"]]
-
-# Extract by position
-df[[1]]
+data(diamonds)
 ```
 
 
-## Subsetting
 
-# `Dplyr`
+# ![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/dplyr.png?raw=true){width=50px} `Dplyr` 
 
-![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/dplyr.png?raw=true)
 
-Choosing Columns with `select()`
+Choosing Columns with `select()`:
 
 ```{r}
 
 ```
 
 
-Renaming variables with `rename()`
+Renaming variables with `rename()`:
 
 ```{r}
 
 ```
 
 
-Sorting and Reordering with `arrange()`
+Sorting and Reordering with `arrange()`:
 
 ```{r}
 
 ```
 
 
-Subsetting and Filtering Data with `filter()`
+Subsetting and Filtering Data with `filter()`:
 
 ```{r}
 
@@ -89,13 +78,13 @@ Adding new columns using `dplyr`'s `mutate()`:
 ```
 
 
-![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_mutate.png)
+### RStudio's `dplyr` cheatsheet
+[https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 
-# Piping
 
-![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/pipe.png?raw=true)
+#  ![](https://github.com/maxogden/hexbin/blob/gh-pages/hexagons/pipe.png?raw=true){width=50px} `%>%` (Piping) 
 
-The pipe, `%>%`, comes from the magrittr package by Stefan Milton Bache. Packages in the tidyverse load `%>%` for you automatically, so you don’t usually load magrittr explicitly. 
+The pipe, `%>%`, comes from the `magrittr` package by Stefan Milton Bache. Packages in the tidyverse load `%>%` for you automatically, so you don’t usually load `magrittr` explicitly. 
 
 The point of the pipe is to help you write code in a way that is easier to read and understand. 
 
@@ -103,7 +92,8 @@ The point of the pipe is to help you write code in a way that is easier to read 
 
 ```
 
-# `tidyr`
+# ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/tidyr.png?raw=true){width=50px} `tidyr` 
+
 
 The goal of tidyr is to help you create tidy data. Tidy data is data where:
 
@@ -111,20 +101,22 @@ The goal of tidyr is to help you create tidy data. Tidy data is data where:
 - Every row is an observation..
 - Every cell is a single value.
 
-Reshaping Data (Wide/Long) 
 
-Wide Data
-Long Data
+Wide Data and Long Data
 
-There are two sets of methods that are explained below:
+`gather()`: 
 
-- `gather()` and `spread()` from the `tidyr` package. This is a newer interface to the reshape2 package.
-- `melt()` and `dcast()` from the `reshape2` package.
 
-![](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/tidyr_spread_gather.png)
+`spread()`:
 
 
 
 
+# ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/stringr.png?raw=true){width=50px} `stringr` 
 
+The `stringr` package provide a set of functions designed to make working with strings as easy as possible. 
 
+Here is a link to download RStudio's `stringr` cheatsheet: [https://github.com/rstudio/cheatsheets/raw/master/strings.pdf](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
+
+### RStudio's `stringr` cheatsheet
+[https://github.com/rstudio/cheatsheets/raw/master/strings.pdf](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
