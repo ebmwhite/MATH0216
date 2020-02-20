@@ -3,22 +3,30 @@ title: 'MATH 216: Assignment 2'
 author: "Your Name Here"
 output: 
   html_document:
-    toc: true
-    toc_float: true
-    theme: yeti
+    code_folding: hide
 ---
 
 ```{r include=FALSE}
 library(tidyverse)
 ```
 
+#  Instructions
+
+- please finish these questions by Wed, Feb 26. 
+- submit the .html file to Canvas
+- you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
+- You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
+- make sure you include at least one acknowledgement 
+
 # Loading the data
 
-The following data is salaries at the University of North Carolina (UNC). Load it the data and take a look through it. 
+The following data is salaries at the University of North Carolina (UNC). Load it the data. 
 
 ```{r}
-data <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
+UNCdata <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
 ```
+
+Take a look at the data. Note what the column names are. Note what each row represents. Note that `fte` means full-time employee. 
 
 # Problems
 
@@ -32,21 +40,22 @@ Return a data frame with columns: `name`, `dept`, `age`, `totalsal`
 
 ## Question 2
 
-Rename the `fte` column to `fulltime`. Make sure this change is saved (i.e. data <- ...).
+Rename the `fte` column to `fulltime`. Make sure this change is saved (i.e. `data <-` ...).
 
 ```{r}
 
 ```
 
 ## Question 3
-What is the mean salary in the Neurosurgery department?
+
+Return the mean salary in the Neurosurgery department?
 
 ```{r}
 
 ```
 
 
-Return a data frame with employee’s in the Neurosurgery department making more than $500,000. Why might these professors be so well paid?
+Return a data frame with employee’s in the Neurosurgery department making more than $500,000. 
 
 ```{r}
 
@@ -69,12 +78,48 @@ How many departments have at least 10 employees?
 
 ```
 
+
+
 ## Question 6
 
-Plot number of people hired by the CS dept per year vs. year
+Create a data frame called `radio_dept` whose rows are the employees from the Radiology department. 
+
+- include only the following columns: `name`, `position`, `age`, `nonstsal`, `totalsal`. 
+- order the employees by `salary`
 
 ```{r}
 
+```
+
+## Question 7
+
+Create a data frame called `dept_summary`  whose rows are the departments and  whose columns are: department size, mean department salary, median department salary, and maximum salary (using `totalsal` for salary). 
+
+```{r }
+
+```
+
+
+Order the departments by highest mean salary and print the 10 highest paid departments, on average. 
+
+```{r }
+#
+```
+
+Order the departments by highest median salary and print the 10 highest paid departments, on average. 
+
+```{r }
+#
+```
+
+Why do these lists differ? If you were asked for the top 10 best paid departments at UNC which summary would you choose and why?
+
+
+## Question 8
+Make a list of all the department names and sort this list alphabetically. What is the 42nd department in this list?
+
+```{r }
+#
 ```
 
 # Acknowledgements

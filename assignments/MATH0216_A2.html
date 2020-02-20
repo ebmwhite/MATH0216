@@ -1552,10 +1552,21 @@ div.tocify {
 </div>
 
 
+<div id="instructions" class="section level1">
+<h1>Instructions</h1>
+<ul>
+<li>please finish these questions by Wed, Feb 26.</li>
+<li>submit the .html file to Canvas</li>
+<li>you are encouraged to work together and ask your peers questions. Each person should submit their own work.</li>
+<li>You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.</li>
+<li>make sure you include at least one acknowledgement</li>
+</ul>
+</div>
 <div id="loading-the-data" class="section level1">
 <h1>Loading the data</h1>
-<p>The following data is salaries at the University of North Carolina (UNC). Load it the data and take a look through it.</p>
-<pre class="r"><code>data &lt;- read.csv(&quot;http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv&quot;)</code></pre>
+<p>The following data is salaries at the University of North Carolina (UNC). Load it the data.</p>
+<pre class="r"><code>UNCdata &lt;- read.csv(&quot;http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv&quot;)</code></pre>
+<p>Take a look at the data. Note what the column names are. Note what each row represents. Note that <code>fte</code> means full-time employee.</p>
 </div>
 <div id="problems" class="section level1">
 <h1>Problems</h1>
@@ -1565,12 +1576,12 @@ div.tocify {
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
-<p>Rename the <code>fte</code> column to <code>fulltime</code>. Make sure this change is saved (i.e. data &lt;- …).</p>
+<p>Rename the <code>fte</code> column to <code>fulltime</code>. Make sure this change is saved (i.e. <code>data &lt;-</code> …).</p>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>
-<p>What is the mean salary in the Neurosurgery department?</p>
-<p>Return a data frame with employee’s in the Neurosurgery department making more than $500,000. Why might these professors be so well paid?</p>
+<p>Return the mean salary in the Neurosurgery department?</p>
+<p>Return a data frame with employee’s in the Neurosurgery department making more than $500,000.</p>
 </div>
 <div id="question-4" class="section level2">
 <h2>Question 4</h2>
@@ -1582,7 +1593,25 @@ div.tocify {
 </div>
 <div id="question-6" class="section level2">
 <h2>Question 6</h2>
-<p>Plot number of people hired by the CS dept per year vs. year</p>
+<p>Create a data frame called <code>radio_dept</code> whose rows are the employees from the Radiology department.</p>
+<ul>
+<li>include only the following columns: <code>name</code>, <code>position</code>, <code>age</code>, <code>nonstsal</code>, <code>totalsal</code>.</li>
+<li>order the employees by <code>salary</code></li>
+</ul>
+</div>
+<div id="question-7" class="section level2">
+<h2>Question 7</h2>
+<p>Create a data frame called <code>dept_summary</code> whose rows are the departments and whose columns are: department size, mean department salary, median department salary, and maximum salary (using <code>totalsal</code> for salary).</p>
+<p>Order the departments by highest mean salary and print the 10 highest paid departments, on average.</p>
+<pre class="r"><code>#</code></pre>
+<p>Order the departments by highest median salary and print the 10 highest paid departments, on average.</p>
+<pre class="r"><code>#</code></pre>
+<p>Why do these lists differ? If you were asked for the top 10 best paid departments at UNC which summary would you choose and why?</p>
+</div>
+<div id="question-8" class="section level2">
+<h2>Question 8</h2>
+<p>Make a list of all the department names and sort this list alphabetically. What is the 42nd department in this list?</p>
+<pre class="r"><code>#</code></pre>
 </div>
 </div>
 <div id="acknowledgements" class="section level1">
