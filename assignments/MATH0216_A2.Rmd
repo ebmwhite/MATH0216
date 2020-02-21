@@ -23,7 +23,12 @@ library(tidyverse)
 The following data is salaries at the University of North Carolina (UNC). Load it the data. 
 
 ```{r}
+#To load directly from webpage
 UNCdata <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
+
+#OR
+#to load locally (from file saved in same folder)
+#UNCdata <- read.csv("UNCdata.csv")
 ```
 
 Take a look at the data. Note what the column names are. Note what each row represents. Note that `fte` means full-time employee. 

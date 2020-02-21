@@ -1,0 +1,119 @@
+---
+title: "MATH 216: In Class Activity 02/21"
+author: "Your Name Here"
+output:
+  html_document:
+    code_folding: hide
+---
+
+# Instructions: 
+
+- Answer the following questions. When you have finished, upload the `.html` file to Canvas. 
+
+**return** or **calculate** means just print it out.
+```{r}
+#ie. 
+sum(1:10)
+```
+**create** or **save** means save the dataframe for future use.
+```{r}
+#ie. 
+x<-sum(1:10)
+```
+
+# Challenge: Use `dplyr` and `%>%`
+
+
+```{r include=FALSE}
+library(tidyverse)
+gapminder <- read.csv("gapminder.csv")
+```
+
+1. Explore the dataframe. What are the names of the columns? What does each row represent? How many rows are there? 
+
+```{r}
+names(gapminder)
+nrow(gapminder)
+```
+
+
+2. Create a dataframe called `Africa` that has information about all the countries in Africa over time, but not for other continents. How many rows does your dataframe have and why?
+
+```{r}
+Africa <- gapminder %>% 
+  filter(continent=="Africa")
+
+nrow(Africa)
+```
+
+3. Create a dataframe called `NorthAmerica` that has the values for `country`, `year`, and population for Canada, the United States, and Mexico but not any other countries. 
+
+```{r}
+NorthAmerica <- gapminder %>% 
+  filter(country=="Canada"|country =="Mexico"|country=="United States") %>% 
+  select(country, year, pop)
+```
+
+4. Return the average life expectancy per country. Which has the longest average life expectancy and which has the shortest average life expectancy?
+
+```{r}
+values <- gapminder %>% 
+  group_by(country) %>% 
+  summarize(mean.life.expectancy = mean(lifeExp))
+
+values %>% 
+  arrange(mean.life.expectancy) %>% 
+  summarize(min.mean.life.expectancy = min(mean.life.expectancy),
+            max.mean.life.expectancy = max(mean.life.expectancy),)
+```
+
+5. Return the count of the total population in each of the continents in 2002. 
+
+```{r}
+gapminder %>% 
+  filter(year==2002) %>% 
+  group_by(continent) %>% 
+  summarize(sum.pop = sum(pop, na.rm=T))
+```
+
+6. Return the mean GDP per capita of all countries in Africa in the year 2002. 
+
+```{r}
+gapminder %>% 
+  filter(continent == "Africa", year==2002) %>% 
+  group_by(country) %>% 
+  summarize(mean.gdp = mean(gdpPercap))
+```
+
+7. Create a new column in the dataset called `gdp_billion` which is equal to the GDP in billions, calculated as `gdpPercap*pop/10^9`. Make sure to save this new column into the `gapminder` data. 
+```{r}
+gapminder <- gapminder %>% 
+  mutate(gdp_billion = gdpPercap*pop/10^9)
+```
+
+8. Try your best to create the data frame `gdp_pop_bycontinients_by_year` from the `gapminder` dataset using `dplyr`commands. 
+
+```{r}
+gdp_pop_bycontinents_byyear <- read.csv("gdp_pop_bycontinents_byyear.csv")
+```
+
+```{r}
+gdp_pop_bycontinents_byyear <- gapminder %>%
+    group_by(continent,year) %>%
+    summarize(mean_gdpPercap = mean(gdpPercap),
+              sd_gdpPercap = sd(gdpPercap),
+              mean_pop = mean(pop),
+              sd_pop = sd(pop),
+              mean_gdp_billion = mean(gdp_billion),
+              sd_gdp_billion = sd(gdp_billion))
+```
+
+9. Explore the data on your own. Present a dataframe that think is interesting. 
+
+```{r}
+
+```
+
+
+
+
