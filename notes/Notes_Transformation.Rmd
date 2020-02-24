@@ -188,6 +188,7 @@ Wide Data and Long Data:
 #load in the tidyr package, you need to do this once in each .Rmd you plan to use these commands for
 library("tidyr")
 ```
+
 ```{r}
 #create a wide dataset 
 set.seed(1)
@@ -205,17 +206,35 @@ stocks_wide
 # OR
 # data %>%  
 #   gather(key = "key", value = "value")
+
+
+#stocks_wide %>% 
+#  gather(key = stock, value = price, X, Y,Z) 
+
+stocks_long <- stocks_wide %>% 
+  gather(key = stock, value = price, X:Z)
+
+stocks_long
 ```
+
 ## `spread()` reshapes long data into wide
 ```{r}
 # spread(.data=data, key, value)
 # OR
 # data %>% 
 #     spread(key, value)
+
+stocks_long %>% 
+  spread(key=stock, value=price)
 ```
 These commands can be utilized in conjunction with the `dplyr` commands we were discussing previously. 
 ```{r}
 #Ex: 
+
+stocks_wide %>% 
+  gather(stock, price, X, Y, Z) %>% 
+  group_by(stock) %>% 
+  summarise(min=min(price), max=max(price))
 ```
 There are other similar functions available. 
 ## `separate()` splits a single variable into two
