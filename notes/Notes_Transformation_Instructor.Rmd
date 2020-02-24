@@ -12,7 +12,7 @@ output:
 
 The tidyverse is an opinionated collection of R packages designed for data science. Make sure that you have the tidyverse installed by typing `install.packages("tidyverse")` into the Console in the bottom left corner. You only need to do this once. 
 
-```{r}
+```{r output=F, warning=F}
 #Within each document, it is important to call the tidyverse package so it knows you will be using functions/data/etc from inside that package
 library(tidyverse)
 ```
@@ -182,18 +182,87 @@ The goal of tidyr is to help you create tidy data. Tidy data is data where:
 - Every row is an observation..
 - Every cell is a single value.
 
-
 Wide Data and Long Data: 
 
-`gather()`: 
-```{r}
+![](https://swcarpentry.github.io/r-novice-gapminder/fig/14-tidyr-fig1.png)
 
+```{r}
+#if you haven't already run install.packages("tidyr"), you only need to do this once
+
+#load in the tidyr package, you need to do this once in each .Rmd you plan to use these commands for
+library("tidyr")
+```
+
+```{r}
+#create a wide dataset 
+set.seed(1)
+stocks_wide <- data.frame(
+   time = as.Date('2009-01-01') + 0:9,
+   X = rnorm(10, 20, 1),
+   Y = rnorm(10, 20, 2),
+   Z = rnorm(10, 20, 4)
+ )
+stocks_wide
+```
+
+## `gather()` is used to convert from wide to long
+
+```{r}
+# gather(.data = data, key, value)
+# OR
+# data %>%  
+#   gather(key = "key", value = "value")
+stocks_long <- stocks_wide %>% 
+  gather(key=stock, value=price, X, Y, Z)
+
+stocks_long
+```
+
+## `spread()` reshapes long data into wide
+```{r}
+# spread(.data=data, key, value)
+# OR
+# data %>% 
+#     spread(key, value)
+
+stocks_back_to_wide <- stocks_long %>% 
+  spread(key=stock, value= price)
+
+stocks_back_to_wide
 ```
 
 
-`spread()`:
+These commands can be utilized in conjunction with the `dplyr` commands were were discussing previously. 
 ```{r}
+#Ex: 
+stocks_wide %>% 
+   gather(stock,price,X:Z)%>% 
+   group_by(stock) %>% 
+   summarise(min = min(price), max = max(price))
 
+```
+
+There are other similar functions available. 
+
+## `separate()` splits a single variable into two
+```{r}
+#separate(data, col, into, sep)
+
+#to split up date
+stocks_wide <- stocks_wide %>% 
+  separate(time,c("year", "month", "day"), sep="-")
+
+stocks_wide
+
+```
+
+## `unite()` merges two variables into one
+```{r}
+#unite(data, col, sep)
+stocks_wide <- stocks_wide %>% 
+  unite(time,c("year", "month", "day"), sep="-")
+
+stocks_wide
 ```
 
 
@@ -201,8 +270,6 @@ Wide Data and Long Data:
 # ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/stringr.png?raw=true){width=50px} `stringr` 
 
 The `stringr` package provide a set of functions designed to make working with strings as easy as possible. 
-
-
 
 ### RStudio's `stringr` cheatsheet
 [https://github.com/rstudio/cheatsheets/raw/master/strings.pdf](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
