@@ -175,16 +175,20 @@ diamonds %>%
 
 # ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/tidyr.png?raw=true){width=50px} `tidyr` 
 
+
 The goal of tidyr is to help you create tidy data. Tidy data is data where:
+
 - Every column is variable.
 - Every row is an observation..
 - Every cell is a single value.
 
 Wide Data and Long Data: 
+
 ![](https://swcarpentry.github.io/r-novice-gapminder/fig/14-tidyr-fig1.png)
 
 ```{r}
 #if you haven't already run install.packages("tidyr"), you only need to do this once
+
 #load in the tidyr package, you need to do this once in each .Rmd you plan to use these commands for
 library("tidyr")
 ```
@@ -200,19 +204,16 @@ stocks_wide <- data.frame(
  )
 stocks_wide
 ```
+
 ## `gather()` is used to convert from wide to long
+
 ```{r}
 # gather(.data = data, key, value)
 # OR
 # data %>%  
 #   gather(key = "key", value = "value")
-
-
-#stocks_wide %>% 
-#  gather(key = stock, value = price, X, Y,Z) 
-
 stocks_long <- stocks_wide %>% 
-  gather(key = stock, value = price, X:Z)
+  gather(key=stock, value=price, X, Y, Z)
 
 stocks_long
 ```
@@ -224,27 +225,44 @@ stocks_long
 # data %>% 
 #     spread(key, value)
 
-stocks_long %>% 
-  spread(key=stock, value=price)
+stocks_back_to_wide <- stocks_long %>% 
+  spread(key=stock, value= price)
+
+stocks_back_to_wide
 ```
-These commands can be utilized in conjunction with the `dplyr` commands we were discussing previously. 
+
+
+These commands can be utilized in conjunction with the `dplyr` commands were were discussing previously. 
 ```{r}
 #Ex: 
-
 stocks_wide %>% 
-  gather(stock, price, X, Y, Z) %>% 
-  group_by(stock) %>% 
-  summarise(min=min(price), max=max(price))
+   gather(stock,price,X:Z)%>% 
+   group_by(stock) %>% 
+   summarise(min = min(price), max = max(price))
+
 ```
+
 There are other similar functions available. 
+
 ## `separate()` splits a single variable into two
 ```{r}
 #separate(data, col, into, sep)
+
 #to split up date
+stocks_wide <- stocks_wide %>% 
+  separate(time,c("year", "month", "day"), sep="-")
+
+stocks_wide
+
 ```
+
 ## `unite()` merges two variables into one
 ```{r}
 #unite(data, col, sep)
+stocks_wide <- stocks_wide %>% 
+  unite(time,c("year", "month", "day"), sep="-")
+
+stocks_wide
 ```
 
 
