@@ -249,13 +249,20 @@ There are other similar functions available.
 #separate(data, col, into, sep)
 
 #to split up date
+stocks_wide <- stocks_wide %>% 
+  separate(time,c("year", "month", "day"), sep="-")
+
+stocks_wide
 
 ```
 
 ## `unite()` merges two variables into one
 ```{r}
 #unite(data, col, sep)
+stocks_wide <- stocks_wide %>% 
+  unite(time,c("year", "month", "day"), sep=" ")
 
+stocks_wide
 ```
 
 

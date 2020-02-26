@@ -1,0 +1,82 @@
+---
+title: "MATH 216: In Class Activity 02/26"
+author: "Your Name Here"
+output:
+  html_document
+---
+
+# Instructions: 
+
+- Answer the following questions. When you have finished, upload the `.html` file to Canvas. 
+
+
+# Challenge: Use `tidyr`
+
+```{r include=FALSE}
+library(tidyverse)
+gapminder <- read.csv("gapminder.csv")
+gapminder <- as_tibble(gapminder)
+```
+
+
+1. Use the space below to reproduce the following dataset. 
+
+(a) `sample_long`
+```{r}
+##          country year lifeExp
+## 1      Australia 1992  77.560
+## 2      Australia 1997  78.830
+## 3      Australia 2002  80.370
+## 4      Australia 2007  81.235
+## 5         Canada 1992  77.950
+## 6         Canada 1997  78.610
+## 7         Canada 2002  79.770
+## 8         Canada 2007  80.653
+## 9  United States 1992  76.090
+## 10 United States 1997  76.810
+## 11 United States 2002  77.310
+## 12 United States 2007  78.242
+```
+
+```{r}
+
+```
+
+(b) `sample_wide`
+```{r}
+##   year Australia Canada United States
+## 1 1992    77.560 77.950        76.090
+## 2 1997    78.830 78.610        76.810
+## 3 2002    80.370 79.770        77.310
+## 4 2007    81.235 80.653        78.242
+```
+
+2. Take notice of the code below. What looks weird about it? How could you fix it? 
+
+```{r}
+gapminder %>%  
+  spread(year, gdpPercap)
+```
+
+3. Consider the  `country`, `year`, `population` columns for all the European countries in the gapminder dataset. Print out version of the table where columns 1 and 2 are the European countries. Columns 3 - 14 should represent the population of the countries each each of the years of study (1952, 1957, 1962, etc). 
+
+```{r}
+
+```
+
+
+4. The first chunk is going to create a new wide datset. 
+
+```{r just_run_me}
+gapminder_wide <- gapminder %>% 
+  group_by(continent,year) %>% 
+  summarise(total_pop=sum(pop, na.rm=T)) %>% 
+  spread(year, total_pop)
+```
+
+Look at the code below which tries to convert the wide data to long data. It should be giving you error. Why?  How could you fix it? 
+
+```{r}
+gapminder_wide %>% 
+  gather(years, total_pop, 2:13)
+```

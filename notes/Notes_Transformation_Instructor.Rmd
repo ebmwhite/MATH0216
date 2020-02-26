@@ -260,7 +260,7 @@ stocks_wide
 ```{r}
 #unite(data, col, sep)
 stocks_wide <- stocks_wide %>% 
-  unite(time,c("year", "month", "day"), sep="-")
+  unite(time,c("year", "month", "day"), sep=" ")
 
 stocks_wide
 ```
