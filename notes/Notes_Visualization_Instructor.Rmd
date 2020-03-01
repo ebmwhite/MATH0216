@@ -124,12 +124,10 @@ We will spend more time later in the course discussing best practices for color 
 ## Adding Text, Labels, and Annotation
 
 ```{r}
-gg <- ggplot(mpg, aes(x=cty, y=hwy, label=mpg$model)) %>%
+ggplot(mpg, aes(x=cty, y=hwy, label=mpg$model)) %>%
   + geom_jitter(aes(col=class), pch=18, size=2) %>% 
-  + geom_text(size=1, hjust=0, vjust=0) %>% 
-  
+  + geom_text(size=1, hjust=0, vjust=0)  
 
-gg
 
 ```
 

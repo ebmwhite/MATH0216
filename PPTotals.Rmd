@@ -1,0 +1,34 @@
+---
+title: "MATH 216 Participation Points Totals"
+date: Last updated on `r format(Sys.time(), '%d %B, %Y')`
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(gsheet)
+library(tidyverse)
+library(randomcoloR)
+library(kableExtra)
+library(lemon)
+
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1-5Tz0ogZvO2k1Dv1lIW8W_YuY0qH2AZb1MmZmN6_wy4/edit?usp=sharing')
+
+totals <- data %>% 
+  group_by(Name) %>% 
+  summarize(total = sum(Points)) 
+
+set.seed(1)
+totals$key <- distinctColorPalette(26)
+
+total_sort<- totals %>% 
+  select(total, key) %>% 
+  arrange(-total)
+```
+
+
+```{r echo=F}
+kable(total_sort) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
+```
+
+
