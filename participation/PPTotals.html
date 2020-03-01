@@ -383,7 +383,7 @@ summary {
 total
 </th>
 <th style="text-align:left;">
-key
+key2
 </th>
 </tr>
 </thead>
@@ -393,7 +393,7 @@ key
 13
 </td>
 <td style="text-align:left;">
-#68DADE
+c
 </td>
 </tr>
 <tr>
@@ -401,7 +401,7 @@ key
 12
 </td>
 <td style="text-align:left;">
-#AE8282
+k
 </td>
 </tr>
 <tr>
@@ -409,7 +409,7 @@ key
 11
 </td>
 <td style="text-align:left;">
-#DD4FD4
+o
 </td>
 </tr>
 <tr>
@@ -417,7 +417,7 @@ key
 11
 </td>
 <td style="text-align:left;">
-#7582E0
+z
 </td>
 </tr>
 <tr>
@@ -425,7 +425,7 @@ key
 10
 </td>
 <td style="text-align:left;">
-#769D98
+m
 </td>
 </tr>
 <tr>
@@ -433,7 +433,7 @@ key
 9
 </td>
 <td style="text-align:left;">
-#67E190
+x
 </td>
 </tr>
 <tr>
@@ -441,7 +441,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#68507D
+y
 </td>
 </tr>
 <tr>
@@ -449,7 +449,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#D587DB
+d
 </td>
 </tr>
 <tr>
@@ -457,7 +457,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E26C50
+g
 </td>
 </tr>
 <tr>
@@ -465,7 +465,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#B1E49F
+a
 </td>
 </tr>
 <tr>
@@ -473,7 +473,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E4D3DD
+b
 </td>
 </tr>
 <tr>
@@ -481,7 +481,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#CCE8D0
+n
 </td>
 </tr>
 <tr>
@@ -489,7 +489,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#C8B4E4
+r
 </td>
 </tr>
 <tr>
@@ -497,7 +497,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#9535E7
+w
 </td>
 </tr>
 <tr>
@@ -505,7 +505,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E1E18E
+j
 </td>
 </tr>
 <tr>
@@ -513,7 +513,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#A8D6E8
+f
 </td>
 </tr>
 <tr>
@@ -521,7 +521,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E6B550
+t
 </td>
 </tr>
 <tr>
@@ -529,7 +529,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E79BB9
+q
 </td>
 </tr>
 <tr>
@@ -537,7 +537,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#85E958
+i
 </td>
 </tr>
 <tr>
@@ -545,7 +545,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#69A9DD
+e
 </td>
 </tr>
 <tr>
@@ -553,7 +553,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#955FDD
+u
 </td>
 </tr>
 <tr>
@@ -561,7 +561,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#83995A
+l
 </td>
 </tr>
 <tr>
@@ -569,7 +569,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#DEB893
+s
 </td>
 </tr>
 <tr>
@@ -577,7 +577,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#D5E355
+p
 </td>
 </tr>
 <tr>
@@ -585,7 +585,7 @@ key
 8
 </td>
 <td style="text-align:left;">
-#6EE3C4
+v
 </td>
 </tr>
 <tr>
@@ -593,11 +593,18 @@ key
 8
 </td>
 <td style="text-align:left;">
-#E35490
+h
 </td>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>for(i in totals$Name){
+test &lt;- data %&gt;% 
+  filter(Name == &quot;i&quot;) 
+key &lt;- totals %&gt;% 
+  filter(Name == &quot;i&quot;) 
+  write.csv(test, paste(key$key[1],&quot;csv&quot;, sep=&quot;.&quot;))
+}</code></pre>
 
 
 

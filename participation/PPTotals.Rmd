@@ -18,24 +18,26 @@ totals <- data %>%
 
 set.seed(1)
 totals$key <- distinctColorPalette(26)
+set.seed(1)
+totals$key2 <- sample(letters)
 
 total_sort<- totals %>% 
-  select(total, key) %>% 
+  select(total, key2) %>% 
   arrange(-total)
 ```
-
 
 ```{r echo=F}
 kable(total_sort) %>% 
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
 ```
 
-```{r include=F}
+```{r }
 for(i in totals$Name){
 test <- data %>% 
-  filter(Name == i) %>% 
-  separate(Name, c("Last", "First"), sep=",")
-  write.csv(test, paste(test$Last[1],"csv", sep="."))
+  filter(Name == "i") 
+key <- totals %>% 
+  filter(Name == "i") 
+  write.csv(test, paste(key$key[1],"csv", sep="."))
 }
 ```
 
