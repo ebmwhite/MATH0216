@@ -9,7 +9,6 @@ library(gsheet)
 library(tidyverse)
 library(randomcoloR)
 library(kableExtra)
-library(lemon)
 
 data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1-5Tz0ogZvO2k1Dv1lIW8W_YuY0qH2AZb1MmZmN6_wy4/edit?usp=sharing')
 
@@ -30,5 +29,15 @@ total_sort<- totals %>%
 kable(total_sort) %>% 
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
 ```
+
+```{r include=F}
+for(i in totals$Name){
+test <- data %>% 
+  filter(Name == i) %>% 
+  separate(Name, c("Last", "First"), sep=",")
+  write.csv(test, paste(test$Last[1],"csv", sep="."))
+}
+```
+
 
 
