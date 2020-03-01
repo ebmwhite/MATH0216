@@ -267,9 +267,3 @@ stocks_wide
 
 
 
-# ![](https://github.com/rstudio/hex-stickers/blob/master/PNG/stringr.png?raw=true){width=50px} `stringr` 
-
-The `stringr` package provide a set of functions designed to make working with strings as easy as possible. 
-
-### RStudio's `stringr` cheatsheet
-[https://github.com/rstudio/cheatsheets/raw/master/strings.pdf](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)

@@ -1,0 +1,170 @@
+---
+title: 'MATH 216: Assignment 2'
+author: "Solution Key"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+#  Instructions
+
+- please finish these questions by Wed, Feb 26. 
+- submit the .html file to Canvas
+- you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
+- You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
+- make sure you include at least one acknowledgement 
+
+# Loading the data
+
+The following data is salaries at the University of North Carolina (UNC). Load it the data. 
+
+```{r}
+#To load directly from webpage
+UNCdata <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
+UNCdata <- as_tibble(UNCdata)
+
+#OR
+#to load locally (from file saved in same folder)
+#UNCdata <- read.csv("UNCdata.csv")
+```
+
+Take a look at the data. Note what the column names are. Note what each row represents. Note that `fte` means full-time employee. 
+
+# Problems
+
+## Question 1 
+
+Return a data frame with columns: `name`, `dept`, `age`, `totalsal`
+
+```{r}
+UNCdata %>% 
+  select(name, dept, age, totalsal)
+```
+
+## Question 2 
+
+Rename the `fte` column to `fulltime`. Make sure this change is saved (i.e. `data <-` ...).
+
+```{r}
+UNCdata <- UNCdata %>% 
+  rename(fulltime=fte)
+```
+
+## Question 3 
+
+Return the mean salary in the Neurosurgery department?
+
+```{r}
+UNCdata %>% 
+  filter(dept == "Neurosurgery") %>% 
+  summarize(mean.totalsal = mean(totalsal))
+```
+
+
+Return a data frame with employees in the Neurosurgery department making more than $500,000. 
+
+```{r}
+UNCdata %>% 
+  filter(dept == "Neurosurgery") %>%
+  filter(totalsal >=500000) %>% 
+  arrange(-totalsal)  #arrange is optional
+```
+
+## Question 4 
+
+What is the total amount that full time Dermatology employees get paid?
+
+```{r}
+UNCdata %>% 
+  filter(dept=="Dermatology") %>% 
+  filter(fulltime==1) %>% 
+  summarize(salary.total=sum(totalsal))
+```
+
+
+## Question 5 
+
+How many departments have at least 10 employees?
+
+```{r}
+UNCdata %>% 
+  group_by(dept) %>% 
+  summarize(count=n()) %>% 
+  filter(count >=10) %>% 
+  nrow()
+```
+
+
+## Question 6
+
+Create a data frame called `radio_dept` whose rows are the employees from the Radiology department. 
+
+- include only the following columns: `name`, `position`, `age`, `nonstsal`, `totalsal`. 
+- order the employees by `salary`
+
+```{r}
+radio_dept <- UNCdata %>%
+  filter(dept == "Radiology") %>% 
+  select(name, position, age, nonstsal, totalsal) %>% 
+  arrange(totalsal)
+
+radio_dept
+```
+
+## Question 7
+
+Create a data frame called `dept_summary`  whose rows are the departments and  whose columns are: department size, mean department salary, median department salary, and maximum salary (using `totalsal` for salary). 
+
+```{r }
+dept_summary <-UNCdata %>% 
+  group_by(dept) %>% 
+  summarize(dept.size = n(), 
+            mean.dept.sal = mean(totalsal), 
+            med.dept.sal = median(totalsal), 
+            max.dept.sal = max(totalsal))
+
+dept_summary
+```
+
+
+Order the departments by highest mean salary and print the 10 highest paid departments, on average. 
+
+```{r }
+dept_summary %>% 
+  select(dept, mean.dept.sal) %>% 
+  arrange(-mean.dept.sal) %>% 
+  head(10)
+```
+
+Order the departments by highest median salary and print the 10 highest paid departments, on average. 
+
+```{r }
+dept_summary %>% 
+  select(dept, med.dept.sal) %>% 
+  arrange(-med.dept.sal) %>% 
+  head(10)
+```
+
+Why do these lists differ? If you were asked for the top 10 best paid departments at UNC which summary would you choose and why?
+
+Median is calculated as the department member who makes a salary exactly in the middle, meaning half their colleagues make more than they do and half their colleagues make less than they do. Mean is calculated differently - it takes the sum of the salaries and divides by the total number of employees. Means are much more effected by outlying (very high or very low) salaries. 
+
+For example, the Office of the Chancellor appears on the top ten departments with highest mean salary but does not appear on the list of top ten departments with highest median salaries. This is because the Chancellor has a very high salary ($520,000), but the remaining salaries in that department are much less. 
+
+
+## Question 8
+Make a list of all the department names and sort this list alphabetically. What is the 42nd department in this list?
+
+```{r }
+dept_summary %>% 
+  select(dept) %>% 
+  arrange(dept) %>% 
+  slice(42)
+```
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this lab. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. **You must include at least one acknowledgement**. 
