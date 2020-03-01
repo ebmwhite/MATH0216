@@ -393,6 +393,14 @@ key2
 13
 </td>
 <td style="text-align:left;">
+z
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
 c
 </td>
 </tr>
@@ -410,14 +418,6 @@ k
 </td>
 <td style="text-align:left;">
 o
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:left;">
-z
 </td>
 </tr>
 <tr>
@@ -599,11 +599,14 @@ h
 </tbody>
 </table>
 <pre class="r"><code>for(i in totals$Name){
+
 test &lt;- data %&gt;% 
-  filter(Name == &quot;i&quot;) 
+  filter(Name == i) 
 key &lt;- totals %&gt;% 
-  filter(Name == &quot;i&quot;) 
-  write.csv(test, paste(key$key[1],&quot;csv&quot;, sep=&quot;.&quot;))
+  filter(Name == i) 
+
+key$key&lt;-sub(&quot;.&quot;, &quot;&quot;, key$key)
+  write.csv(test, paste(key$key,&quot;csv&quot;, sep=&quot;.&quot;))
 }</code></pre>
 
 
