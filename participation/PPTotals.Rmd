@@ -33,11 +33,14 @@ kable(total_sort) %>%
 
 ```{r }
 for(i in totals$Name){
+
 test <- data %>% 
-  filter(Name == "i") 
+  filter(Name == i) 
 key <- totals %>% 
-  filter(Name == "i") 
-  write.csv(test, paste(key$key[1],"csv", sep="."))
+  filter(Name == i) 
+
+key$key<-sub(".", "", key$key)
+  write.csv(test, paste(key$key,"csv", sep="."))
 }
 ```
 
