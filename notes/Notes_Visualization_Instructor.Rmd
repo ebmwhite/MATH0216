@@ -152,7 +152,7 @@ gg + theme_bw()
 
 ```{r}
 library(ggthemes) #make sure you have run install.packages("ggthemes") on your computer at some point
-gg + theme_wsj()
+gg + theme_wsj() + scale_color_wsj()
 ```
 
 # More Plot Types
@@ -178,6 +178,14 @@ ggplot(mpg, aes(cty)) +
        subtitle="City MPG") 
 ```
 
+```{r}
+ggplot(mpg, aes(cty)) +
+  scale_fill_brewer(palette = "Spectral") +
+  geom_histogram(binwidth=2) +   # change binwidth
+  labs(title="Histogram with Auto Binning", 
+       subtitle="City MPG") +
+  coord_trans(x="log10")
+```
 
 ## Boxplots 
 
@@ -185,16 +193,28 @@ Boxplots should be used for one continuous variable. Side-by-Side Boxplots can b
 
 ```{r}
 ggplot(mpg, aes(class, cty))  +
-  geom_boxplot( fill="plum") +
+  geom_boxplot( fill="plum", outlier.size=1) +
   labs(title="Box plot", 
          subtitle="City Mileage grouped by Class of vehicle",
          caption="Source: mpg",
          x="Class of Vehicle",
-         y="City Mileage")
+         y="City Mileage") 
 ```
 
 
 
+
+```{r}
+mpg %>% 
+  mutate(class = reorder(class, cty, median )) %>% 
+  ggplot(aes(class, cty))  +
+  geom_boxplot( fill="plum", outlier.size=1) +
+  labs(title="Box plot", 
+         subtitle="City Mileage grouped by Class of vehicle",
+         caption="Source: mpg",
+         x="Class of Vehicle",
+         y="City Mileage") 
+```
 
 ## Barplots
 
@@ -231,7 +251,6 @@ ggplot(mpg, aes(manufacturer)) +
 
 The are **so many** different ways to modify the themes -  the legend, where the axis ticks go, the background colors, the position of text, the font, etc. You can get a the full scope of all the options by typing `?theme` into the console. 
 
-## 
 
 ## Colors (Hidden)
 
@@ -259,16 +278,47 @@ Use grey color scales:
 gapminder <- read.csv("https://ebmwhite.github.io/MATH0216/activities/gapminder.csv")
 ```
 
-# EDA Process
+```{r}
+ggplot(gapminder, aes(x=year, y=lifeExp, group=country)) +
+  geom_line()
+```
 
 
+```{r}
+gapminder %>%
+    group_by(continent, year) %>%
+    summarise(lifeExp=median(lifeExp)) %>%
+    ggplot(aes(x=year, y=lifeExp, color=continent)) +
+     geom_line(size=1) + 
+     geom_point(size=1.5)
+```
+
+## Gapminder
+
+```{r}
+gapminder %>% 
+  filter(year==1952) %>% 
+  ggplot( aes(gdpPercap, lifeExp, color = continent)) +
+  geom_point(aes(size = pop)) +
+  scale_x_log10()
+```
+
+
+## `Plotly`
+
+```{r}
+library(plotly)
+gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, frame = year)) +
+  geom_point(aes(size = pop)) +
+  #geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
+ggplotly(gg) %>% 
+  highlight("plotly_hover")
+```
 
 
 # Activity 
 
-`mpg`
-`NYCairbnb2019.csv`
-`gapminder`
 
 ```{r}
 #library(openintro)
