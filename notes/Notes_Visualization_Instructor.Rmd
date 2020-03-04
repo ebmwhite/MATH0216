@@ -56,15 +56,20 @@ A blank ggplot is drawn. Even though the x and y are specified, there are no poi
 The basics: 
 ```{r}
 
+mpg %>% 
+  ggplot(aes(x=cty, y=hwy)) +
+  geom_point()
+
+## OR
+
 ggplot(mpg, aes(x=cty, y=hwy)) +
   geom_point()
 
-##OR 
+## OR 
 
 ggplot(mpg, aes(x=cty, y=hwy)) %>% 
    + geom_point()
 
-  
 ```
 
 To customize colors, plotting characters, size: 
@@ -163,7 +168,6 @@ Histograms should be used for one continuous variable.
 
 ```{r}
 ggplot(mpg, aes(cty)) + 
-  scale_fill_brewer(palette = "Spectral") +
   geom_histogram() + # change binwidth
   labs(title="Histogram with Auto Binning", 
        subtitle="City MPG") 
@@ -172,7 +176,6 @@ ggplot(mpg, aes(cty)) +
 
 ```{r}
 ggplot(mpg, aes(cty)) +
-  scale_fill_brewer(palette = "Spectral") +
   geom_histogram(binwidth=2) +   # change binwidth
   labs(title="Histogram with Auto Binning", 
        subtitle="City MPG") 
@@ -180,7 +183,6 @@ ggplot(mpg, aes(cty)) +
 
 ```{r}
 ggplot(mpg, aes(cty)) +
-  scale_fill_brewer(palette = "Spectral") +
   geom_histogram(binwidth=2) +   # change binwidth
   labs(title="Histogram with Auto Binning", 
        subtitle="City MPG") +

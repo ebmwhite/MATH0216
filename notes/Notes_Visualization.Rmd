@@ -170,20 +170,16 @@ ggplot(mpg, aes(cty))  +
 ```
 
 
-```{r}
- 
-```
-
-
 ## Boxplots 
 
 Boxplots should be used for one continuous variable. Side-by-Side Boxplots can be good for comparing a numerical variable across many different levels (categories). 
 
 ```{r}
-
+mpg %>% 
+  mutate(class = reorder(class, cty, FUN=median)) %>% 
+  ggplot(aes(x=class, y=cty)) +
+  geom_boxplot(fill="steelblue", outlier.size = 4)
 ```
-
-
 
 
 ## Barplots
@@ -191,15 +187,51 @@ Boxplots should be used for one continuous variable. Side-by-Side Boxplots can b
 Barplots should be used for one or two categorical variables. 
 
 ```{r}
-
+mpg %>% 
+  mutate(unit = 1) %>% 
+  mutate(manufacturer = reorder(manufacturer, unit, FUN=sum)) %>% 
+  ggplot(aes(x=manufacturer)) +
+  geom_bar() +
+  labs(title="Barplot of One Categorical Variable", subtitle="Manufacturers of Cars") +
+theme(axis.text.x=element_text(angle=90))
+  #coord_flip()
 ```
 
 
 ```{r}
- 
+mpg %>% 
+  ggplot(aes(manufacturer)) +
+  geom_bar(aes(fill=class)) +
+  coord_flip() +
+  scale_fill_brewer(palette="Spectral")
 ```
 
 The are **so many** different ways to modify the themes -  the legend, where the axis ticks go, the background colors, the position of text, the font, etc. You can get a the full scope of all the options by typing `?theme` into the console. 
+`scale_color_brewer()` is for points, lines, etc.
+`scale_fill_brewer()` is for barplots, boxplots
+
+`scale_color_manual()` is for points, lines, etc.
+`scale_fill_manual()` is for barplots, boxplots
+
+## Time Series
+
+```{r}
+gapminder <- read.csv("https://ebmwhite.github.io/MATH0216/activities/gapminder.csv")
+```
+
+```{r}
+gapminder %>% 
+  ggplot(aes(x=year, y=lifeExp, group=country)) +
+  geom_line()
+```
+
+```{r}
+gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(lifeExp = mean(lifeExp)) %>% 
+  ggplot(aes(x=year, y=lifeExp,color=continent)) +
+  geom_line()
+```
 
 
 # Quick Reference
