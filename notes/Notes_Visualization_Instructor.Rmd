@@ -16,6 +16,7 @@ output:
 #Within each document, it is important to call the ggplot2 package so it knows you will be using functions/data/etc from inside that package
 library(ggplot2)
 library(tidyverse)
+library(RColorBrewer)
 ```
 
 It’s essential that you properly organize your data into a data frame before you start with `ggplot2`. This why we spend the last week or two focus on learning ways to transform and wrangle data into different formats. 
@@ -54,15 +55,23 @@ A blank ggplot is drawn. Even though the x and y are specified, there are no poi
 
 The basics: 
 ```{r}
+
+ggplot(mpg, aes(x=cty, y=hwy)) +
+  geom_point()
+
+##OR 
+
 ggplot(mpg, aes(x=cty, y=hwy)) %>% 
-  +geom_point()
+   + geom_point()
+
+  
 ```
 
 To customize colors, plotting characters, size: 
 ```{r }
 
-ggplot(mpg, aes(x=cty, y=hwy)) %>% 
-  +geom_point(col="steelblue", pch=18, size=2)
+ggplot(mpg, aes(x=cty, y=hwy)) + 
+  geom_point(col="steelblue", pch=18, size=2)
 
 ```
 
@@ -73,10 +82,9 @@ ggplot(mpg, aes(x=cty, y=hwy)) %>%
 Let’s make a scatterplot on top of the blank ggplot by adding points using a geom layer called `geom_point`.
 
 ```{r}
-ggplot(mpg, aes(x=cty, y=hwy)) %>% 
-  +geom_point(col="steelblue", pch=18, size=2) %>% 
-  #+ geom_jitter() %>% 
-  + labs(title="Scatterplot", subtitle="City MPG vs. Highway MPG", y="Highway MPG", x="City MPG", caption="source: mpg")
+ggplot(mpg, aes(x=cty, y=hwy))  +
+  geom_point(col="steelblue", pch=18, size=2) +
+  labs(title="Scatterplot", subtitle="City MPG vs. Highway MPG", y="Highway MPG", x="City MPG", caption="source: mpg") 
 # + xlab("Area") 
 # + ylab("Population")
 #  + xlim(c(0,30)) %>% 
@@ -88,9 +96,9 @@ The warning is being given because we have adjusted the x and y axis to exclude 
 ## Colors by Group
 
 ```{r}
-gg <- ggplot(mpg, aes(x=cty, y=hwy)) %>% 
-  + geom_point(aes(col=class), pch=18, size=2) %>% 
-  + labs(title="Scatterplot", subtitle="City MPG vs. Highway MPG", y="Highway MPG", x="City MPG", caption="source: mpg") 
+gg <- ggplot(mpg, aes(x=cty, y=hwy))  +
+  geom_point(aes(col=class), pch=18, size=2)  +
+  labs(title="Scatterplot", subtitle="City MPG vs. Highway MPG", y="Highway MPG", x="City MPG", caption="source: mpg") 
 
 gg
 ```
@@ -124,9 +132,9 @@ We will spend more time later in the course discussing best practices for color 
 ## Adding Text, Labels, and Annotation
 
 ```{r}
-ggplot(mpg, aes(x=cty, y=hwy, label=mpg$model)) %>%
-  + geom_jitter(aes(col=class), pch=18, size=2) %>% 
-  + geom_text(size=1, hjust=0, vjust=0)  
+ggplot(mpg, aes(x=cty, y=hwy, label=mpg$model)) +
+  geom_jitter(aes(col=class), pch=18, size=2) +
+  geom_text(size=1, hjust=0, vjust=0)  
 
 
 ```
@@ -154,19 +162,19 @@ gg + theme_wsj()
 Histograms should be used for one continuous variable. 
 
 ```{r}
-ggplot(mpg, aes(cty)) %>% 
-  + scale_fill_brewer(palette = "Spectral") %>% 
-  + geom_histogram() %>%   # change binwidth
-  + labs(title="Histogram with Auto Binning", 
+ggplot(mpg, aes(cty)) + 
+  scale_fill_brewer(palette = "Spectral") +
+  geom_histogram() + # change binwidth
+  labs(title="Histogram with Auto Binning", 
        subtitle="City MPG") 
 ```
 
 
 ```{r}
-ggplot(mpg, aes(cty)) %>% 
-  + scale_fill_brewer(palette = "Spectral") %>% 
-  + geom_histogram(binwidth=2) %>%   # change binwidth
-  + labs(title="Histogram with Auto Binning", 
+ggplot(mpg, aes(cty)) +
+  scale_fill_brewer(palette = "Spectral") +
+  geom_histogram(binwidth=2) +   # change binwidth
+  labs(title="Histogram with Auto Binning", 
        subtitle="City MPG") 
 ```
 
@@ -176,9 +184,9 @@ ggplot(mpg, aes(cty)) %>%
 Boxplots should be used for one continuous variable. Side-by-Side Boxplots can be good for comparing a numerical variable across many different levels (categories). 
 
 ```{r}
-ggplot(mpg, aes(class, cty)) %>% 
-  + geom_boxplot( fill="plum") %>% 
-  + labs(title="Box plot", 
+ggplot(mpg, aes(class, cty))  +
+  geom_boxplot( fill="plum") +
+  labs(title="Box plot", 
          subtitle="City Mileage grouped by Class of vehicle",
          caption="Source: mpg",
          x="Class of Vehicle",
@@ -193,25 +201,89 @@ ggplot(mpg, aes(class, cty)) %>%
 Barplots should be used for one or two categorical variables. 
 
 ```{r}
-ggplot(mpg, aes(manufacturer)) %>% 
-  + geom_bar() %>% 
-  + theme(axis.text.x = element_text(angle=90)) %>% 
-  + labs(title="Barplot on Two Categorical Variables", 
+ggplot(mpg, aes(manufacturer)) + 
+  geom_bar() +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title="Barplot on One Categorical Variable", 
        subtitle="Manufacturer across Vehicle Classes") 
+
+## OR 
+ggplot(mpg, aes(x = manufacturer)) +
+  geom_bar(fill="blue") + 
+  #+ theme(axis.text.x = element_text(angle=90)) 
+  labs(title="Barplot on One Categorical Variable", 
+       subtitle="Manufacturer across Vehicle Classes") + 
+  coord_flip() 
+  #+ scale_fill_brewer(palette = "Spectral")
+
 ```
 
 
 ```{r}
-ggplot(mpg, aes(manufacturer)) %>% 
-  + geom_bar(aes(fill=class)) %>% 
-  + labs(title="Barplot on Two Categorical Variables", 
-       subtitle="Manufacturer across Vehicle Classes") %>% 
-  + theme_classic() %>% 
-  + theme(axis.text.x = element_text(angle=90)) 
+ggplot(mpg, aes(manufacturer)) + 
+  geom_bar(aes(fill=class)) +
+  labs(title="Barplot on Two Categorical Variables", 
+       subtitle="Manufacturer across Vehicle Classes") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle=90)) +
+  scale_fill_brewer(palette = "Spectral")
 ```
 
 The are **so many** different ways to modify the themes -  the legend, where the axis ticks go, the background colors, the position of text, the font, etc. You can get a the full scope of all the options by typing `?theme` into the console. 
 
+## 
+
+## Colors (Hidden)
+
+Set ggplot color manually:
+
+`scale_fill_manual()` for box plot, bar plot, violin plot, dot plot, etc
+`scale_color_manual()` or `scale_colour_manual()` for lines and points
+Use colorbrewer palettes:
+
+`scale_fill_brewer()` for box plot, bar plot, violin plot, dot plot, etc
+`scale_color_brewer()` or `scale_colour_brewer()` for lines and points
+Use grey color scales:
+
+`scale_fill_grey()` for box plot, bar plot, violin plot, dot plot, etc
+`scale_colour_grey()` or `scale_colour_brewer()` for points, lines, etc
+
+```{r}
+#custom.col <- c("#FFDB6D", "#C4961A", "#F4EDCA",  "#D16103", "#C3D7A4", "#52854C", "#4E84C4", "#293352")
+
+```
+
+## Line Plots
+
+```{r}
+gapminder <- read.csv("https://ebmwhite.github.io/MATH0216/activities/gapminder.csv")
+```
+
+# EDA Process
+
+
+
+
+# Activity 
+
+`mpg`
+`NYCairbnb2019.csv`
+`gapminder`
+
+```{r}
+#library(openintro)
+#cars
+
+#library(tidyverse)
+data(diamonds)
+force(diamonds)
+
+#NYCairbnb2019.csv
+
+surveys <- read.csv("https://ebmwhite.github.io/MATH0216/data/sample.csv")
+gapminder <- read.csv("https://ebmwhite.github.io/MATH0216/activities/gapminder.csv")
+UNCdata <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
+```
 
 # Quick Reference
 

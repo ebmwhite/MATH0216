@@ -51,14 +51,14 @@ A blank ggplot is drawn. Even though the x and y are specified, there are no poi
 
 The basics: 
 ```{r}
-ggplot(mpg, aes(cty, hwy)) %>% 
-   + geom_point()
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point()
 ```
 
 To customize colors, plotting characters, size: 
 ```{r }
-ggplot(mpg, aes(cty, hwy)) %>% 
-   + geom_point(col="steelblue", pch=1, size=2)
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point(col="steelblue", pch=1, size=2)
 ```
 
 ![A list of possible `pch` values](https://4.bp.blogspot.com/-y8lc2d5wC5Y/V1MPvuoT4BI/AAAAAAAAY3g/G1i3OQx0nq8IZUUGw8qjraPFvYEh5IXaACLcB/s1600/Rplot01.png){width=200px}
@@ -68,9 +68,9 @@ ggplot(mpg, aes(cty, hwy)) %>%
 Let’s make a scatterplot on top of the blank ggplot by adding points using a geom layer called `geom_point`.
 
 ```{r}
-ggplot(mpg, aes(cty, hwy)) %>% 
-  + geom_point(col="steelblue", size=2) %>% 
-  + labs(title="City MPG vs. Highway MPG", 
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point(col="steelblue", size=2) +
+  labs(title="City MPG vs. Highway MPG", 
          subtitle="this is a subtitle", 
          x="City MPG", 
          y="Highway MPG", 
@@ -83,9 +83,9 @@ ggplot(mpg, aes(cty, hwy)) %>%
 ## Colors by Group
 
 ```{r}
-gg <- ggplot(mpg, aes(cty, hwy)) %>% 
-  + geom_point(aes(col=class), size=2) %>% 
-  + labs(title="City MPG vs. Highway MPG", 
+gg <- ggplot(mpg, aes(cty, hwy)) +
+  geom_point(aes(col=class), size=2) +
+  labs(title="City MPG vs. Highway MPG", 
          subtitle="this is a subtitle", 
          x="City MPG", 
          y="Highway MPG", 
@@ -124,14 +124,14 @@ We will spend more time later in the course discussing best practices for color 
 ## Adding Text, Labels, and Annotation
 
 ```{r}
-ggplot(mpg, aes(cty, hwy, label=model)) %>% 
-  + geom_point(aes(col=class), size=2) %>% 
-  + labs(title="City MPG vs. Highway MPG", 
+ggplot(mpg, aes(cty, hwy, label=model)) +
+  geom_point(aes(col=class), size=2) +
+  labs(title="City MPG vs. Highway MPG", 
          subtitle="this is a subtitle", 
          x="City MPG", 
          y="Highway MPG", 
-         caption="source: mpg dataset") %>% 
-  + geom_text(size=2)
+         caption="source: mpg dataset") +
+  geom_text(size=2)
 
 
 
@@ -165,8 +165,8 @@ Histograms should be used for one continuous variable.
 ```{r}
 #hist(mpg$cty)
 
-ggplot(mpg, aes(cty)) %>% 
-  + geom_histogram(binwidth=2)
+ggplot(mpg, aes(cty))  +
+  geom_histogram(binwidth=2)
 ```
 
 
