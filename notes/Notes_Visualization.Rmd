@@ -197,6 +197,17 @@ theme(axis.text.x=element_text(angle=90))
   #coord_flip()
 ```
 
+```{r}
+mpg %>% 
+  mutate(unit = 1) %>% 
+  mutate(manufacturer = reorder(manufacturer, unit, FUN=sum)) %>% 
+  ggplot(aes(x=manufacturer)) +
+  geom_bar() +
+  geom_text(stat='count', aes(label=..count..), vjust=-1)
+  labs(title="Barplot of One Categorical Variable", subtitle="Manufacturers of Cars") +
+theme(axis.text.x=element_text(angle=90))
+```
+
 
 ```{r}
 mpg %>% 

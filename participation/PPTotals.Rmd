@@ -31,7 +31,7 @@ kable(total_sort) %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
 ```
 
-```{r }
+```{r include=FALSE}
 for(i in totals$Name){
 
 test <- data %>% 
