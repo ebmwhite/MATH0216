@@ -1,0 +1,19 @@
+---
+title: "The Title of your Mini-Project Here"
+author: "Your Name(s) Here"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+# Introduction 
+
+
+# Results
+
+
+# Discussion
+
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this project. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. 

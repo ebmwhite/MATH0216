@@ -321,19 +321,25 @@ ggplotly(gg) %>%
 
 # Activity 
 
-
 ```{r}
-#library(openintro)
-#cars
-
 #library(tidyverse)
 data(diamonds)
 force(diamonds)
 
-#NYCairbnb2019.csv
+#library(openintro)
+cars
 
+#NYCairbnb2019
+NYCairbnb2019 <-read.csv("https://ebmwhite.github.io/MATH0216/data/NYCairbnb2019.csv")
+
+#surveys
 surveys <- read.csv("https://ebmwhite.github.io/MATH0216/data/sample.csv")
+
+
+#gapminder
 gapminder <- read.csv("https://ebmwhite.github.io/MATH0216/activities/gapminder.csv")
+
+#UNCdata
 UNCdata <- read.csv("http://ryanthornburg.com/wp-content/uploads/2015/05/UNC_Salares_NandO_2015-05-06.csv")
 ```
 

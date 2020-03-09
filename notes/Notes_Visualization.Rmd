@@ -178,7 +178,7 @@ Boxplots should be used for one continuous variable. Side-by-Side Boxplots can b
 mpg %>% 
   mutate(class = reorder(class, cty, FUN=median)) %>% 
   ggplot(aes(x=class, y=cty)) +
-  geom_boxplot(fill="steelblue", outlier.size = 4)
+  geom_boxplot(fill="steelblue", outlier.size = 0)
 ```
 
 
@@ -205,7 +205,7 @@ mpg %>%
   geom_bar() +
   geom_text(stat='count', aes(label=..count..), vjust=-1)
   labs(title="Barplot of One Categorical Variable", subtitle="Manufacturers of Cars") +
-theme(axis.text.x=element_text(angle=90))
+  theme(axis.text.x=element_text(angle=90))
 ```
 
 
