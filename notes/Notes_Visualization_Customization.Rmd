@@ -117,7 +117,7 @@ dp + scale_x_date(breaks = date_breaks("months"),
   labels = date_format("%b"))
 ```
 
-We will spend some more time talking about dates soon... 
+We will spend some more time talking about dates when we get back from break... 
 
 # Change the appearance text (font, face, colour, size, angle) 
 
