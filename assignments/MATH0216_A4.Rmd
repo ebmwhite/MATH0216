@@ -16,6 +16,7 @@ library(maps)
 - you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
 - You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
 - make sure you include at least one acknowledgement 
+- Note that is question is worth 4 points. The assignment is worth 12 points total. 
 
 ### Loading the data
 
@@ -52,6 +53,9 @@ worldmap <- ne_countries(scale = 'medium', type = 'map_units',returnclass = 'sf'
 data <- read.csv("https://ebmwhite.github.io/MATH0216/data/worlddata.csv")
 data$Country <- as.character(trimws(data$Country))
 data$phones <- as.numeric(data$phones)
+
+#format map data for joining
+world_map$Country <- as.character(world_map$region)
 
 #join map data with dataset
 world_data <- left_join(world_map, data , by = "Country")
