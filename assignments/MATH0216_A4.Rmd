@@ -1,0 +1,69 @@
+---
+title: 'MATH 216: Assignment 4'
+author: "Your Name Here"
+output: 
+  html_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(maps)
+```
+
+#  Instructions
+
+- submit the .html file to Canvas
+- you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
+- You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
+- make sure you include at least one acknowledgement 
+
+### Loading the data
+
+```{r}
+## maps
+library(maps)
+world_map <- map_data("world")  #to map countries in the world
+states_map <- map_data("state") #to map states in the US
+counties_map <-map_data("county") #to map counties in the US
+
+## rnaturalearth
+library(rnaturalearth)
+worldmap <- ne_countries(scale = 'medium', type = 'map_units',returnclass = 'sf')
+```
+
+## Question 1: Display a map of the State of Vermont. The map should display all the counties in Vermont. Make sure your plot is well labeled. (Optional: put a marker where Middlebury College is located.) 
+
+```{r}
+
+```
+
+
+## Question 2: Use `rnaturalearth` and the dataset `worldmap` to create a map of Africa. Shade the countries by the variable `economy` (contained within the `worldmap` dataset). Make sure your plot is well labeled.
+
+```{r}
+
+```
+
+
+## Question 3: The following should help you create a dataset `world_data` which contains information about many countries in the world. Create a map in an area of the world of your choice (ie. Africa, Caribbean, etc.) shading each of the countries using the variable `phones` which represents the number of phones per 1000 people. Make sure your plot is well labeled.
+
+```{r}
+#read in and format dataset
+data <- read.csv("https://ebmwhite.github.io/MATH0216/data/worlddata.csv")
+data$Country <- as.character(trimws(data$Country))
+data$phones <- as.numeric(data$phones)
+
+#join map data with dataset
+world_data <- left_join(world_map, data , by = "Country")
+```
+
+
+```{r}
+#create a map! 
+
+```
+
+
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this lab. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. **You must include at least one acknowledgement**. 
