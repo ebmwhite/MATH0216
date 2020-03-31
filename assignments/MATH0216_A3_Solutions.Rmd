@@ -1,0 +1,192 @@
+---
+title: 'MATH 216: Assignment 3'
+author: "Solutions"
+output: 
+  pdf_document:
+    extra_dependencies: ["xcolor"]
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+
+```{r include=F}
+#To load directly from `nycflights13` package
+library(nycflights13)
+tblflights <- tbl_df(flights)
+
+#OR
+# to load from local .csv file
+#tblflights <- read.csv("tblflights.csv")
+```
+
+
+
+# Problems
+
+## Question 1
+
+\textcolor{purple}{Worth 2 points. Students may have created not have printed the column for route, but it should be apparent from their code that they have created it using `unite`, `paste`, or similar. }
+
+Create a new column called `route` which contains the both the origin and destination airport codes seperated by a dash. For example, a flight that goes from JFK to MIA should display `JFK-MIA` in this new column. 
+
+
+```{r}
+tblflights %>% 
+  unite(route, c(origin, dest), sep="-") %>% 
+  select(year, month, day, dep_time, route) %>% #optional
+  head(10) #optional
+
+## OR
+# tblflights$route <- paste(tblflights$origin, "-", tblflights$dest) 
+```
+
+\newpage 
+
+## Question 2
+
+\textcolor{purple}{1 point for getting the answer 16. 2 points for printing out the table.}
+
+How many different airlines are there? 
+
+```{r}
+length(unique(tblflights$carrier))
+
+#OR 
+#length(levels(as.factor(tblflights$carrier)))
+
+## There are lots of different ways to do this
+```
+
+
+Determine the mean departure delay for each of these different airlines.  Note: the var `dep_delay` is the arrival delay in minutes. 
+
+```{r}
+tblflights %>% 
+  group_by(carrier) %>% 
+  summarize(mean.delay=mean(dep_delay, na.rm=T)) #na.rm=T is iport
+```
+
+\newpage
+
+Whoops! no question 3... 
+
+## Question 4
+
+\textcolor{purple}{2 points for a the appropriate table. }
+
+Print a list of the 10 flights with the longest departure delays. Your list should include the date, schedule departure time, actual departure time, carrier, the departure airport and destination airport.
+
+Optional: include a meme of how you would feel if you were on one of these 10 flights
+
+```{r}
+tblflights %>%
+  arrange(-dep_delay) %>%
+  head(10) %>%
+  select(year, month, day, sched_dep_time, dep_time, dep_delay, carrier, origin, dest)
+```
+
+
+
+\newpage
+
+## Question 5
+
+\textcolor{purple}{Worth 3 points. Take off marks for not including a title, or x and y axis labels. Students may have chosen to add a limit to the x-axis to better display the data.}
+
+Create two histograms - one for the departure delays and one for the arrival delays. Make sure they are well-labelled (have a title, x and y axis labels, etc.)
+
+
+```{r warning=FALSE, output=FALSE}
+library(gridExtra)
+```
+
+```{r fig.width= 6, fig.height=3, warning=F}
+plot1 <- tblflights %>%
+  ggplot(aes(dep_delay)) +
+  geom_histogram(binwidth = 11) +
+  labs(title = "Distribution of Departure Delays",
+         caption = "source: 'tblflights' dataset",
+         x = "Departure Delay (in Minutes)",
+         y = "# of Flights")
+
+plot2 <- tblflights %>%
+  ggplot(aes(arr_delay)) +
+  geom_histogram(binwidth = 11) +
+  labs(title = "Distribution of Arrival Delays",
+         caption = "source: 'tblflights' dataset",
+         x = "Arrival Delay (in Minutes)",
+         y = "# of Flights")
+
+grid.arrange(plot1, plot2, ncol=2)
+```
+
+\newpage
+
+## Question 6
+
+\textcolor{purple}{3 points. Take off marks for not including a title, or x and y axis labels. Students may have chosen transform the y axis or to subset the y-axis to better see the comparison. Both are okay with me.}
+
+For all the flights JFK - LAX, create a side-by-side boxplot to compare the arrival delay across all carriers. Make sure they are well-labelled (have a title, x and y axis labels, etc.)
+
+```{r warning=F}
+JFKLAX <- tblflights %>% 
+  filter(origin == "JFK", dest =="LAX") %>% 
+  mutate(arr_delay_trans = arr_delay^(1/3)) 
+
+ggplot(JFKLAX, aes(carrier, arr_delay)) +
+  geom_boxplot( fill="plum") +
+  labs(title="Box plots of Arrival Delay grouped by Carrier", 
+         subtitle="Arrival Delays less than 100 minutes",
+         caption="Source: nycflights13",
+         x="Carrier",
+         y="Arrival Delay") +
+  ylim(c(0,100))
+```
+
+\newpage
+
+## Question 7
+
+\textcolor{purple}{Worth 3 points.}
+
+Create a table called carrier_flights_over_time that displays the count of the number of flights for all carriers across all months in wide format.
+
+Hint: the first column should be all the carriers, the first row should be all the months. The data inside the table should be the number of flights.
+
+```{r}
+carrier_flights_over_time <- tblflights %>%
+  group_by(carrier, month) %>%
+  summarize(num_flights = n()) %>%
+  spread(month, num_flights)
+
+carrier_flights_over_time
+```
+
+\newpage
+
+## Question 8: Challenge
+
+\textcolor{purple}{Worth 3 points. Take off marks for not including a title, or x and y axis labels}
+
+Consider all the flights going from anywhere in the NYC area to anywhere in the NYC area (JFK, LGA or EWR) to anywhere in the San Fransisco Bay area (SFO, SJC or OAK). Sum how many flights were ran by each airline in each month and create a line plot to show the the number of flights varies over time for each airline. Make sure your plot is well-labelled (have a title, x and y axis labels, etc.)
+
+```{r warning=F}
+tblflights %>%
+  filter((origin == "JFK" | origin == "LGA" | origin == "EWR") & (dest == "SFO" | dest == "SJC" | dest == "OAK")) %>%
+  group_by(carrier, month) %>%
+  summarize(num_flights = n()) %>%
+  ggplot(aes(x = month, y = num_flights, group = carrier, color = carrier)) + 
+  geom_line() +
+  labs(title = "Number of Flights from New York City to San Francisco by Month",
+         subtitle = "New York (JFK/LGA/EWR) \U2192 San Francisco (SFO/SJC/OAK)",
+         x = "Month",
+         y = "# of Flights",
+         color = "Carrier") + # color='Carrier' meant to change legend title
+  scale_x_discrete(limits=c(1:12))
+```
+
+
+# Acknowledgements
+\textcolor{purple}{Worth 1 mark. Make sure the students include at least one acknowledgement. }
