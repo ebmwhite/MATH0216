@@ -64,8 +64,9 @@ Let's pretty it up.
 
 ```{r}
 ggplot() + 
-  geom_sf(data = nc, col="black", fill="grey") + 
-  theme_light()
+  geom_sf(data = nc, col="black", fill="darkgrey") + 
+  theme_light() +
+  ggtitle("North Carolina Counties")
 
 #Remember the other theme options: theme_grey(), theme_bw(), theme_dark(), theme_minimal(), theme_classic(), theme_void()
 ```
@@ -80,15 +81,18 @@ ggplot() +
 
 Here are some options to customize the plot that you might be interested in. 
 
+
 ```{r}
 ggplot() + 
-  geom_sf(data=nc[1:3,]) + #you may only want to plot a subset of the counties. In this case I subsetted the first 3 rows. You could also use filter. 
+  geom_sf(data=nc) + 
   aes(fill = BIR74) +
-  geom_sf_text(data = nc[1:3, ], aes(label = NAME)) + # add name labels
+  geom_sf_text(data = nc[nc$BIR74 > 15000,], aes(label = NAME), fontface="bold") + # add name labels
   scale_fill_gradientn(colors = c('red','yellow')) + #customize colors
   theme_light() +
   ggtitle("3 Counties in North Carolina, Birth Rates in 1974")
 ```
+
+
 
 # Color Brewer
 
@@ -102,8 +106,8 @@ display.brewer.all()
 A note about customizing colors: 
 
 - you should use a color scheme that is sequential (has order to it), when you are displaying continuous data
-- you should use a color scheme that is categorial, when your data is in categories and isn't ordered
-- you should use a color scheme that is diverging, when want to put emphasis on two extremes and mid-range. For example, you might use a diversging palette from red to blue for political party affiliation in the US. 
+- you should use a color scheme that is categorical, when your data is in categories and isn't ordered
+- you should use a color scheme that is diverging, when want to put emphasis on two extremes and mid-range. For example, you might use a diverging palette from red to blue for political party affiliation in the US. 
 - pay attention to your map being color blind friendly (`RdYlGr` is the worst...)
 - as a general rule, try not to use blue to represent a land mass (let's reserve that for bodies of water)
 
@@ -112,7 +116,7 @@ display.brewer.all(type="all", colorblindFriendly=TRUE)
 ```
 
 
-You can break up sequential or diverging palettes into a fixed number of colours using `brewer.pal`. 
+You can break up sequential or diverging palettes into a fixed number of colors using `brewer.pal`. 
 
 ```{r}
 brewer.pal(11, "Spectral")
@@ -128,8 +132,8 @@ ggplot() +
   geom_sf(data=nc) + 
   aes(fill = BIR74) +
   ggtitle("North Carolina, Birth Rates in 1974") +
-  scale_fill_gradientn(colors = brewer.pal(8, "Spectral") )  #customize colors
-
+  scale_fill_gradientn(colors = brewer.pal(8, "Spectral") ) +  #customize colors
+  theme_light()
 ```
 
 ```{r}
@@ -302,7 +306,7 @@ ggplot(world_map, aes(long, lat)) +
 ```
 
 
-You can subset the data from particular country/countries.  
+You can subset the data from particular country/counties.  
 
 ## USA
 
@@ -331,7 +335,7 @@ ggplot(usa, aes(long, lat)) +
   coord_sf(xlim = c(-130, -65), ylim = c(20, 50)) 
 ```
 
-Also when using maps the `coord_fixed(ratio = 1)` is also super important so the aspect ratio is maintained (a country may appear super stretched or squished). This isn't too bad for the USA, but for a longer skinner country like Italy this can get pretty wonky. 
+Also when using maps the `coord_fixed(ratio = 1)` is also super important so the aspect ratio is maintained (a country may appear super stretched or squished). This isn't too bad for the USA, but for a longer skinnier country like Italy this can get pretty wonky. 
 
 ```{r}
 italy <- map_data("world", region = "Italy")
@@ -360,7 +364,7 @@ ggplot(italy, aes(long, lat)) +
 
 ## EU
 
-Create a dataset with most european countries:
+Create a dataset with most European countries:
 ```{r}
 some.eu.countries <- c(
   "Portugal", "Spain", "France", "Switzerland", "Germany",
