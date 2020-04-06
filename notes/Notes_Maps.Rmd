@@ -19,9 +19,17 @@ There have been several different iterations of how to create maps over the year
 
 ```{r, message=F}
 library(tidyverse)
-#you will need to run install.packages("package name") if this is the first time you have used these packages
+
+### You will need to run install.packages("package name") if this is the first time you have used these packages
+
+#install.packages("sf") - note some students are getting a pop-up when they install the sf package for the first time. Select the "no" option when it pops up in your console. 
 library(sf)
+
+#install.packages("maps")
 library(maps)
+
+#some students are needing into install the rgeos package seperately as well
+#library(rgeos)
 ```
 
 
