@@ -11,7 +11,7 @@ output:
 
 # Web scraping: Something exists on the web, and I want it.
 
-Often times you will see data posted on the web (in a Wikepedia page, etc.) but it may not be readily available to download as a .csv file. You can use the `rvest` packages to "scrape" the information from the web and import it into R. 
+Often times you will see data posted on the web (in a Wikipedia page, etc.) but it may not be readily available to download as a .csv file. You can use the `rvest` packages to "scrape" the information from the web and import it into R. 
 
 ```{r}
 #install.packages('rvest')
@@ -59,9 +59,7 @@ ggplot() +
   ggtitle("Map of Tall Volcanos") 
 ```
 
-# What if it's not a html table? 
-
-You can use `rvest` to scrape data that isn't in table format. It gets trickier and is best left to those that are vaguely familar with html code. Here is a cool tutorial for those interested: [https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/](https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/) 
+ 
 
 # Example: State Populations
 
@@ -118,5 +116,7 @@ head(pop.data)
 
 Again, we can use all our usual tools to manipulate, summarize, and plot our data. 
 
+# What if it's not a html table? 
 
+You can use `rvest` to scrape data that isn't in table format. It gets trickier and is best left to those that are vaguely familar with html code. Here is a cool tutorial for those interested: [https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/](https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/)
 
