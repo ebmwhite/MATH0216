@@ -107,7 +107,7 @@ Below is a nice visualization of left, right, inner, and outer joins.
 
 ![](https://cdn.mindmajix.com/blog/images/db-01_2119.png){width=300px}
 
-![]( https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSVwGvE91jxzPzDAnaemRly2hppYJ4sJGl-31cEG6Kf6_kFy71i&usqp=CAU){width=300px}
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSVwGvE91jxzPzDAnaemRly2hppYJ4sJGl-31cEG6Kf6_kFy71i&usqp=CAU){width=300px}
 
 
 There are other kinds of joins (`semi_join()`, `full_join()`, etc.) if you want to learn more about them. 
