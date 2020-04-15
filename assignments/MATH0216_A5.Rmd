@@ -76,7 +76,7 @@ Note: you can answer this by manually looking at the tables, or you can use the 
 
 ```
 
-## Question 6: List the names and addresses (including `address`, `city`, and `state`) of the people who placed orders on Saturday, April 13, 2020. (2 points).  
+## Question 6: List the names and addresses (including `address`, `city`, and `state`) of the people who placed orders on March 13, 2020. (2 points).  
 
 ```{r}
 
