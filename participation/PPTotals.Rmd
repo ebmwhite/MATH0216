@@ -40,6 +40,7 @@ for(i in totals$Name){
 test <- data %>% 
   filter(Name == i) %>% 
   select(Timestamp, Points, Why)
+
 key <- totals %>% 
   filter(Name == i) 
 
