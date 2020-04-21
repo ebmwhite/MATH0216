@@ -1,0 +1,11 @@
+---
+title: 'MATH 216 - Notes: Modeling'
+author: "Emily Malcolm-White"
+output: 
+  html_document:
+    fig_crop: yes
+    toc: true
+    toc_float: true
+    theme: yeti
+---
+
