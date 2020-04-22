@@ -4,7 +4,7 @@ date: Last updated on `r format(Sys.time(), '%d %B, %Y')`
 output: html_document
 ---
 
-Your goal is to get at least **40 participation points** for the semester to earn full credit for the participation component of the course. Earning more than 50 points is awesome, but will not have any additional impact on your grade. 
+Your goal is to get at least **40 participation points** for the semester to earn full credit for the participation component of the course. Earning more than 40 points is awesome, but will not have any additional impact on your grade. 
 
 ```{r setup, include=FALSE}
 library(gsheet)
@@ -16,7 +16,7 @@ data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1-5Tz0ogZvO2k1Dv1lIW8
 
 totals <- data %>% 
   group_by(Name) %>% 
-  summarize(total = sum(Points)) 
+  summarize(total = sum(Points, na.rm=T)) 
 
 set.seed(1)
 totals$key <- distinctColorPalette(26)
@@ -31,7 +31,8 @@ total_sort<- totals %>%
 
 ```{r echo=F}
 kable(total_sort) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F)
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>% 
+  row_spec(1:4, bold = T,  background = "#D0F0C0")
 ```
 
 ```{r include=FALSE}
