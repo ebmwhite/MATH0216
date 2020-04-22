@@ -1,0 +1,78 @@
+---
+title: 'MATH 216: Assignment 6'
+author: "Your Name Here"
+output: 
+  html_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+#  Instructions
+
+- submit the .html file to Canvas
+- you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
+- You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
+- make sure you include at least one acknowledgement 
+- The assignment is worth 15 points total (3 points each). The specific number of points for each part is listed below. 
+
+### Loading the data
+
+The goal of this homework is to explore the data set `taboo.csv`. This data set contains information from a subset of participants in a study that
+sought to investigate possible relationships between "taboo" topics and a measure of a participant's overall happiness. You may assume that the participants were selected
+randomly, and no two participants were from the same immediate family. 
+
+```{r}
+taboo <-read.csv("https://raw.githubusercontent.com/ebmwhite/MATH0216/master/assignments/taboo.csv")
+```
+
+The variables in this data set are:
+1) `ID`- The ID of the person in the study. Participant have been given anonymous
+IDs to protect their identity.
+2) `Salary` - The yearly gross income for that participant.
+3) `Gender`- The participant's self-reported gender. For this subset, only participants reporting male or female were selected.
+4) `Sex`- The self-reported average number of times the participant engaged in sexual activity per week.
+5) `Alcohol` - The average number of 12oz. alcoholic drinks the participant consumes weekly.
+6) `Marijuana` - A binary variable. 1 indicates the participant uses marijuana regularly, defined as smoking marijuana at least once a week. 0 indicates the participant
+never or rarely uses marijuana.
+7) `Cigarette` -  A binary variable. 1 indicates the participant smokes at least a pack of
+cigarettes per week. 0 indicates the participant smokes less than a pack of cigarettes
+per week.
+8) `Happiness` - An indicator of the participant's happiness, on a scale from 1 to 100.
+
+These values were obtained through a survey which asked basic questions about the participant's well-being and current satisfaction about their life.
+
+## Question 1: Construct a linear model using salary to predict happiness. Plot this linear model against the data. How well does your model fit the data? (3 points)
+
+```{r}
+
+```
+
+## Question 2: Given the trend in the graph in (1), try adding another variable (in addition to salary) to your model to predict happiness. Is this model better or worse? Why? (3 points) 
+
+```{r}
+
+```
+
+
+## Question 3: Construct a graph that includes the variables sex, happiness, and gender. Comment about what you see. (3 points)
+
+```{r}
+
+```
+
+
+## Question 4: Now, construct a linear model that predicts happiness as a function of the Sex and Gender variables. What does this model tell you about the relationship between these variables (and how does this compare to your observations from (3)). (3 points)
+
+```{r}
+
+```
+
+
+## Question 5: Build the best model you can to predict whether or not a randomly selected person smokes cigarettes. Which variables are most correlated with cigarette smoking, and which are least correlated? (3 points)
+
+```{r}
+
+```
+
