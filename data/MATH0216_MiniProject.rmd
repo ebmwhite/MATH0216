@@ -1,0 +1,62 @@
+---
+title: "Reproductive Toxicity of Nitrofen in Aquatic Systems"
+author: "Patty Alonso Rivera"
+output: 
+  html_document:
+    code_folding: hide
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r}
+nitrofen <- read.csv ("nitrofen.csv")
+```
+
+
+
+```{r}
+total_nitrofen <- nitrofen %>%
+  group_by(conc) %>%
+  summarise(avg_total = mean(total)) 
+  
+total_nitrofen
+```
+
+```{r}
+total_nitrofen %>%
+  ggplot(aes(conc, avg_total)) +
+  geom_point(col="steelblue", size=4) +
+  labs(title = "The Average of Total Live Offsprings Per Level of Nitrofen Concentration",
+       x = "Nitrofen Concentration Level (mug/litre)",
+       y = " Average of Total Live Offsprings")
+```
+
+```{r}
+nitrofen %>%
+  mutate(conc = reorder(conc, brood3, FUN = median)) %>%
+  ggplot(aes(x=conc, y=brood3)) +
+  geom_boxplot(fill="steelblue", outlier.size = 0) +
+  labs(title = "Third Brood Per Level of Nitrofen Concentration",
+       x = "Nitrofen Concentration Level (mug/litre)",
+       y = "Amount of live offspring in the Third Brood.")
+```
+
+
+# Introduction 
+Nitrofen is a herbicide that leads to teratogenic effects, such as growth defects, to the aquatic ecosystem. The data measures the reproductive toxicity of nitrofen in aquatic systems, specifically for a species of zooplankton called Ceriodaphnia dubia. The data was collected through an experiment conducted by A.J. Bailer and J.T. Oris in 1994. Fifty animals were randomly put into batches of 10, and each batch was assigned a solution of nitrofen concentration (0, 80, 160, 235, and 310 mug/litre). The number of live offsprings for the first three broods of each batch and the total number of live offsprings for the first three broods of each batch were recorded. I will look at three variables: the nitrofen concentration in the solution, the number of live offsprings in the third brood, and the total number of live offsprings for brood1, brood2, and brood3. This data is important to analyze and interpret because it sheds light on the negative impact nitrofen has not only on the development of Ceriodaphnia dubia but also on the growth of the aquatic ecosystem.
+
+# Results
+For the plot graph, I grouped the data by concentration levels to display the average total live offsprings per concentraion level. In doing so, I calculated the mean of the total number of live offspring for each concentration levels. For the boxplot, I calculated the median of the number of live offspring in the third brood for each concentration levels. As a result, we are able to see the the median, lower, and upper quartile for the third brood per concentration levels. In addition, we can see the different amounts of offsprings among the concentration levels. 
+
+# Discussion
+From this exploratory data analysis, I learned about the negative impact nitrofen has on the number of offsprings. Based on the line graph, there is a negative correlation between the population of offsprings and the amount of nitrofen exposed to the population. The average of the total number of live offsprings decreases exponentially as the level of nitrofen concentration increases. Based on the box plot, there is also a negative corrletaion between the median of live offsprings in the third brood and nitrofen concentration levels. The median of live offsprings increases as the concentration levels decreases. The box plot also demonstrates that when the concentration is 310 mug/litre the amount of live offsprings is 0 for the third brood, meaning no offsprings are contributing to the population. As a result, the population does not increase. In conclusion, the data demonstrates that animals are less likely to reproduce efficiently due to the exposure of nitrofen causing an imbalance in the aquatic ecosystem.
+
+For future work, I would suggest there should be a new experiment conducted since the data was obtain more than 20 years ago. This new experiment would measure the negative impact of nitrofen at a larger scale to better represent the scale of the aquatic ecosystem. In order to do this, the number of animals that participate in this new experiment should increase to around 100 or more. With that being said, I wish I had information on the 50 animals that participated in the experiment to see if some animals are more impacted by nitrofen than other animals. If that's the case, then it's important to bring awareness to the high impact nitrofen has on certain animals to preserve these animals and prevent nitrofen from being used as a pesticide in parts of the world. 
+
+
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this project. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. 
+Elvira G. Alonso

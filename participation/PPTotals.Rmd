@@ -25,14 +25,19 @@ totals$key2 <- sample(letters)
 
 total_sort<- totals %>% 
   select(total, key2) %>% 
-  arrange(-total)
+  arrange(-total) 
+
+n=0
+for(i in 1:length(total_sort$total)){
+  if(total_sort$total[i]>=40){total_sort$total[i] = "> 40"; n=n+1}
+}
 ```
 
 
 ```{r echo=F}
 kable(total_sort) %>% 
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>% 
-  row_spec(1:10, bold = T,  background = "#D0F0C0")
+  row_spec(1:n, bold = T,  background = "#D0F0C0")
 ```
 
 ```{r include=FALSE}
