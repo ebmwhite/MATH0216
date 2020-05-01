@@ -4,6 +4,8 @@ date: Last updated on `r format(Sys.time(), '%d %B, %Y')`
 output: html_document
 ---
 
+Testing
+
 Your goal is to get at least **40 participation points** for the semester to earn full credit for the participation component of the course. Earning more than 40 points is awesome, but will not have any additional impact on your grade. 
 
 ```{r setup, include=FALSE}
@@ -12,7 +14,7 @@ library(tidyverse)
 library(randomcoloR)
 library(kableExtra)
 
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1-5Tz0ogZvO2k1Dv1lIW8W_YuY0qH2AZb1MmZmN6_wy4/edit?usp=sharing')
+data <- gsheet2tbl('HIDDEN')
 
 totals <- data %>% 
   group_by(Name) %>% 
