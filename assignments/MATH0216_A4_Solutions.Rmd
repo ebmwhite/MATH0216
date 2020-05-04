@@ -1,0 +1,131 @@
+---
+title: 'MATH 216: Assignment 4'
+author: "Solutions"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(maps)
+```
+
+#  Instructions
+
+- submit the .html file to Canvas
+- you are encouraged to work together and ask your peers questions. Each person should submit their own work. 
+- You may share parts of your code to ask or answer questions on Slack. You should avoid sharing (copying and pasting) the entirety of your answers.
+- make sure you include at least one acknowledgement 
+- Note that is question is worth 4 points. The assignment is worth 12 points total. 
+
+### Loading the data
+
+```{r}
+## maps
+library(maps)
+world_map <- map_data("world")  #to map countries in the world
+states_map <- map_data("state") #to map states in the US
+counties_map <-map_data("county") #to map counties in the US
+
+## rnaturalearth
+library(rnaturalearth)
+worldmap <- ne_countries(scale = 'medium', type = 'map_units',returnclass = 'sf')
+```
+
+## Question 1: Display a map of the State of Vermont. The map should display all the counties in Vermont. Make sure your plot is well labeled. (Optional: put a marker where Middlebury College is located.) 
+
+```{r}
+vermont_counties <- counties_map %>%
+  filter(region == "vermont") %>%
+  group_by(region)
+
+long <- c(-73.1760)  
+lat <- c(44.0081)  
+mc <- as.data.frame(cbind(long,lat))
+
+ggplot(vermont_counties, aes(long, lat)) + 
+  geom_polygon(aes(fill = subregion), col="black") + 
+  coord_fixed(ratio = 1) +
+  geom_point(data = mc, aes(x = long, y = lat), pch = 19, size=0.5)+
+  annotate("text", x = long, y = lat, label = "Middlebury College", size=2, vjust=-1)+
+  theme_light() + 
+  ggtitle("Counties in Vermont")
+```
+
+It should have: 
+- a title
+- x and y axis labels
+- counties labelled in some way
+
+Things I'm not picky about: 
+
+- color choice
+- whether or not Middlebury College is labelled
+- how the counties are labelled - some students may do it in a legend and other may have gone the extra mile and labelled on the map
+
+## Question 2: Use `rnaturalearth` and the dataset `worldmap` to create a map of Africa. Shade the countries by the variable `economy` (contained within the `worldmap` dataset). Make sure your plot is well labeled.
+
+```{r}
+africa <- ne_countries(scale = 'medium', type = 'map_units',returnclass = 'sf', continent = 'africa')
+ggplot() +
+  geom_sf(data = africa) + 
+  aes(fill=economy)+
+  theme_light()+
+  ggtitle("Map of Africa (by Economy Type)")
+```
+
+
+## Question 3: The following should help you create a dataset `world_data` which contains information about many countries in the world. Create a map in an area of the world of your choice (ie. Africa, Caribbean, etc.) shading each of the countries using the variable `phones` which represents the number of phones per 1000 people. Make sure your plot is well labeled.
+
+```{r}
+#read in and format dataset
+data <- read.csv("https://ebmwhite.github.io/MATH0216/data/worlddata.csv")
+data$Country <- as.character(trimws(data$Country))
+data$phones <- as.numeric(data$phones)
+
+#format map data for joining
+world_map$Country <- as.character(world_map$region)
+
+#join map data with dataset
+world_data <- left_join(world_map, data , by = "Country")
+```
+
+There are MANY different possibilities here. Students maps should: 
+
+- have a title
+- x and y axis labelled clearly
+- have regions shaded by density of cell phones
+
+Here are a couple of great examples: 
+
+```{r}
+#create a map! 
+#create a map! 
+library(RColorBrewer)
+
+asia_phones <- world_data %>%
+  filter(Region=="ASIA (EX. NEAR EAST)         ")
+
+ggplot(asia_phones, aes(long, lat)) +
+  geom_polygon(aes(group=group, fill=phones), col="black") +
+  ggtitle("Number of Phones per 1,000 People (Asia)") +
+  theme_light() +
+  labs(x="Longitude", y="Latitude") +
+  scale_fill_gradientn(name="# of Phones / 1,000 People", colors = brewer.pal(8, "PiYG"))
+```
+
+```{r}
+world_data <- subset(world_data, region == "Cyprus" | region == "Turkey" | region ==  "Syria" | region == "Lebanon" | region == "Israel" | region ==  "Jordan" | region == "Iraq" | region == "Iran" | region == "Saudi Arabia" | region == "Yemen" | region == "Oman" | region == "United Arab Emirates" | region == "Qatar" | region == "Kuwait" | region == "Egypt" | region == "Libya")
+
+ggplot(world_data, aes(long, lat, group = group)) +
+  geom_polygon(aes(fill = phones), color = "black") +
+  scale_fill_gradientn(colors = c('white','maroon')) +
+  coord_fixed(ratio = 1)+
+  theme_light() + 
+  ggtitle("Middle East, Phones per 1000 Citizens")
+```
+
+
+# Acknowledgements
+Use this space to acknowledge anyone who has helped you with this lab. This could be a peer who helped you when you got stuck. This could be the peer tutor.  This could be your family or a friend for their support. **You must include at least one acknowledgement**. 
